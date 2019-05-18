@@ -15,6 +15,7 @@
         <module>grass-parent</module>
         <module>grass-console</module>
         <module>grass-web</module>
+        <module>grass-eureka</module>
     </modules>
 
 </project>
