@@ -15,8 +15,11 @@
     <dependencies>
         <dependency>
             <groupId>com.grass</groupId>
+            <artifactId>grass-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.grass</groupId>
             <artifactId>grass-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

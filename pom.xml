@@ -16,6 +16,7 @@
         <module>grass-console</module>
         <module>grass-web</module>
         <module>grass-eureka</module>
+        <module>grass-api</module>
     </modules>
 
 </project>

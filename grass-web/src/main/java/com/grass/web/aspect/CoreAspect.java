@@ -30,7 +30,7 @@ public class CoreAspect implements InitializingBean {
 
     private static final Logger log = LoggerFactory.getLogger(CoreAspect.class);
 
-    @Value("${app.aspect.log.switcher:false}")
+    @Value("${aspect.log.switcher:false}")
     private boolean switcher;
 
     /**

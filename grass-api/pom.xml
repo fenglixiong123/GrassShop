@@ -10,13 +10,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>grass-eureka</artifactId>
+    <artifactId>grass-api</artifactId>
 
     <dependencies>
-        <!--eureka-server包含了web模块-->
+        <!--添加feign服务-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!--添加common服务-->
+        <dependency>
+            <groupId>com.grass</groupId>
+            <artifactId>grass-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

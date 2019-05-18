@@ -1,0 +1,19 @@
+
+server:
+    port: 8082
+spring:
+  application:
+    name: grass-admin
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:7000/eureka/
+
+# 配置是否显示aop日志信息
+aspect:
+  log:
+    switcher: true

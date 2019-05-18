@@ -37,6 +37,24 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--grass-web-->
+            <dependency>
+                <groupId>com.grass</groupId>
+                <artifactId>grass-web</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--grass-api-->
+            <dependency>
+                <groupId>com.grass</groupId>
+                <artifactId>grass-api</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--grass-common-->
+            <dependency>
+                <groupId>com.grass</groupId>
+                <artifactId>grass-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
             <!--spring-kafka-->
             <dependency>
                 <groupId>org.springframework.kafka</groupId>
