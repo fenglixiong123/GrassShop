@@ -17,17 +17,14 @@ import java.util.List;
 @Component
 public class AdminServiceFallBack implements FallbackFactory<IAdminService> {
 
-    @Override
     public IAdminService create(Throwable throwable) {
         return new IAdminService() {
 
-            @Override
             public AdminVo getAdmin(Long id) {
                 AdminVo adminVo = new AdminVo();
                 return adminVo;
             }
 
-            @Override
             public List<AdminVo> listAdmin() {
                 return Arrays.asList(
                         new AdminVo(),

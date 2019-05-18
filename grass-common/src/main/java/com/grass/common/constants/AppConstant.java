@@ -7,7 +7,7 @@ package com.grass.common.constants;
  **/
 public class AppConstant {
 
-    public static final String GRASS_CONSOLE = "grass_console";
-    public static final String GRASS_ADMIN = "grass_admin";
+    public static final String GRASS_CONSOLE = "grass-console";
+    public static final String GRASS_ADMIN = "grass-admin";
 
 }

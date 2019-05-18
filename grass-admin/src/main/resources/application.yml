@@ -7,11 +7,17 @@ spring:
 eureka:
   instance:
     hostname: 127.0.0.1
+    prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:7000/eureka/
+
+#开启hystrix服务
+feign:
+  hystrix:
+    enabled: true
 
 # 配置是否显示aop日志信息
 aspect:

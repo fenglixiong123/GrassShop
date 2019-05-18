@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Description
  **/
 @Slf4j
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.grass.api")
 @EnableEurekaClient
 @SpringBootApplication
 public class GrassConsoleApplication {
