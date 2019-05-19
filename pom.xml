@@ -17,6 +17,7 @@
         <module>grass-web</module>
         <module>grass-eureka</module>
         <module>grass-api</module>
+        <module>grass-gateway</module>
     </modules>
 
 </project>

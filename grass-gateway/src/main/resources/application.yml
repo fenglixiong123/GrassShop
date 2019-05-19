@@ -1,9 +1,15 @@
 
 server:
-    port: 8082
+  port: 8080
+
 spring:
   application:
-    name: grass-admin
+    name: grass-gateway
+  cloud:
+    gateway:
+      default-filters:
+
+
 eureka:
   instance:
     hostname: 127.0.0.1
@@ -14,17 +20,6 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:7000/eureka/
 
-# hystrix
-feign:
-  hystrix:
-    enabled: true
-
-# aop
-aspect:
-  log:
-    switcher: true
-
-# set log level
 logging:
   level:
-    org.grass.admin: debug
+    org.springframework.gateway: trace

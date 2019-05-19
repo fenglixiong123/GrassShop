@@ -115,5 +115,16 @@
         </plugins>
     </build>
 
+    <!--配置仓库-->
+    <repositories>
+        <repository>
+            <id>aliRepository</id>
+            <name>aliRepository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>

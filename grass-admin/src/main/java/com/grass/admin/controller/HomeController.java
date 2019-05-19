@@ -4,7 +4,7 @@ import com.grass.web.annotation.RequestLimit;
 import com.grass.web.annotation.SysLog;
 import com.grass.web.enums.BizTypeEnum;
 import com.grass.web.enums.OperateTypeEnum;
-import com.grass.web.result.ResultResponse;
+import com.grass.common.result.ResultResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

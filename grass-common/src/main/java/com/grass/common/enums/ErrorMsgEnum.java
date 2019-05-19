@@ -1,4 +1,4 @@
-package com.grass.web.enums;
+package com.grass.common.enums;
 
 /**
  * @Author Fenglixiong

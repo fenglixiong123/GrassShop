@@ -1,8 +1,8 @@
-package com.grass.web.result;
+package com.grass.common.result;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.grass.web.enums.ErrorMsgEnum;
+import com.grass.common.enums.ErrorMsgEnum;
 import lombok.Data;
 
 /**

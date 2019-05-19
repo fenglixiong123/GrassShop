@@ -1,10 +1,10 @@
 package com.grass.web.exception.handler;
 
 
-import com.grass.web.enums.ErrorMsgEnum;
+import com.grass.common.enums.ErrorMsgEnum;
 import com.grass.web.exception.element.BizException;
 import com.grass.web.exception.element.ParamException;
-import com.grass.web.result.ResultResponse;
+import com.grass.common.result.ResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;

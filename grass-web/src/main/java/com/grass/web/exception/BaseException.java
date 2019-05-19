@@ -1,7 +1,7 @@
 package com.grass.web.exception;
 
 
-import com.grass.web.enums.ErrorMsgEnum;
+import com.grass.common.enums.ErrorMsgEnum;
 
 /**
  * @Author Fenglixiong
