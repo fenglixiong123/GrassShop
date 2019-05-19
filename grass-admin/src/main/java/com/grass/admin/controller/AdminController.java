@@ -2,14 +2,12 @@ package com.grass.admin.controller;
 
 import com.grass.admin.service.AdminService;
 import com.grass.api.vo.admin.AdminVo;
+import com.grass.common.page.PageQuery;
+import com.grass.common.page.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * @Author Fenglixiong
@@ -31,9 +29,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public List<AdminVo> listAdmin(){
-        log.info("listAdmin---->");
-        return adminService.listAdmin();
+    public PageResult<AdminVo> listAdmin(@RequestParam Integer page, @RequestParam(defaultValue = "10") Integer pageSize){
+        log.info("listAdmin---->page:{},pageSize:{}",page,pageSize);
+        PageQuery<AdminVo> pageQuery = new PageQuery<>(page,pageSize);
+        return adminService.listAdmin(pageQuery);
     }
 
 }
