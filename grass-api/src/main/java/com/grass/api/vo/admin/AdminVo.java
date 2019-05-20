@@ -1,7 +1,9 @@
 package com.grass.api.vo.admin;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -17,11 +19,13 @@ public class AdminVo {
     /**
      * 用户名
      */
+    @NotNull(message = "username not be null")
     private String username;
 
     /**
      * 昵称
      */
+    @NotNull(message = "nickname not be null")
     private String nickname;
 
     /**
@@ -32,6 +36,7 @@ public class AdminVo {
     /**
      * 电话
      */
+    @NotNull(message = "phone not be null")
     private String phone;
 
     /**
@@ -42,6 +47,7 @@ public class AdminVo {
     /**
      * 性别1男2女
      */
+    @Range(min = 1,max = 2)
     private Integer sex;
 
     private String address;
@@ -59,6 +65,7 @@ public class AdminVo {
     /**
      * 状态0不可用1正常
      */
+    @Range(min = 0,max = 1)
     private Integer status;
 
     private Date createTime;

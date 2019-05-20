@@ -10,12 +10,15 @@ import com.grass.admin.service.AdminService;
 import com.grass.api.vo.admin.AdminVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
+import com.grass.web.exception.element.ParamException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
     private AdminDao adminDao;
 
     @Override
-    public AdminVo getAdmin(Long id) {
+    public AdminVo get(Long id) {
         AdminVo adminVo = new AdminVo();
         Admin admin = adminDao.selectByPrimaryKey(id);
         BeanUtils.copyProperties(admin,adminVo);
@@ -39,9 +42,47 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public PageResult<AdminVo> listAdmin(PageQuery<AdminVo> pageQuery) {
+    public Long add(AdminVo adminVo) {
+        Admin admin = new Admin();
+        admin.setPassword("123456");
+        BeanUtils.copyProperties(adminVo,admin);
+        adminDao.insertSelective(admin);
+        return admin.getId();
+    }
+
+    @Override
+    public int update(AdminVo adminVo) {
+        if(adminVo.getId()==null){
+            throw new ParamException("更新ID为空！");
+        }
+        Admin admin = new Admin();
+        BeanUtils.copyProperties(adminVo,admin);
+        admin.setUpdateTime(new Date());
+        return adminDao.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
+    public int delete(Long id) {
+        return adminDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public PageResult<AdminVo> list(PageQuery<AdminVo> pageQuery) {
         Page<Admin> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
         AdminExample example = new AdminExample();
+        AdminVo queryVo = pageQuery.getEntity();
+        if(queryVo!=null){
+            AdminExample.Criteria criteria = example.createCriteria();
+            if(StringUtils.isNotBlank(queryVo.getUsername())){
+                criteria.andUsernameLike("%"+queryVo.getUsername()+"%");
+            }
+            if(StringUtils.isNotBlank(queryVo.getNickname())){
+                criteria.andNicknameLike("%"+queryVo.getNickname()+"%");
+            }
+            if(queryVo.getSex()!=null){
+                criteria.andSexEqualTo(queryVo.getSex());
+            }
+        }
         List<Admin> adminList =adminDao.selectByExample(example);
         PageInfo<Admin> pageInfo =new PageInfo<>(page);
         List<AdminVo> adminVoList = new ArrayList<>();

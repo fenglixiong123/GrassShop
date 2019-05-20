@@ -7,8 +7,16 @@ import com.grass.common.page.PageResult;
 
 public interface AdminService {
 
-    AdminVo getAdmin(Long id);
+    AdminVo get(Long id);
 
-    PageResult<AdminVo> listAdmin(PageQuery<AdminVo> pageQuery);
+    Long add(AdminVo adminVo);
+
+    int update(AdminVo adminVo);
+
+    int delete(Long id);
+
+    PageResult<AdminVo> list(PageQuery<AdminVo> pageQuery);
+
+
 
 }
