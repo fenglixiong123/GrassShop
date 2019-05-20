@@ -1,6 +1,7 @@
 package com.grass.api.vo.admin;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @Description
  **/
 @Data
+@NoArgsConstructor
 public class AdminVo {
 
     private Long id;
@@ -72,4 +74,8 @@ public class AdminVo {
 
     private Date updateTime;
 
+    public AdminVo(Long id,String username) {
+        this.id = id;
+        this.username = username;
+    }
 }

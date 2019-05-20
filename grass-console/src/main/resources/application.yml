@@ -13,3 +13,8 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:7000/eureka/
+
+# hystrix
+feign:
+  hystrix:
+    enabled: true

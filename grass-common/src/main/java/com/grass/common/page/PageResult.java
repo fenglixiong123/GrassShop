@@ -17,15 +17,18 @@ import java.util.stream.Collectors;
 public class PageResult<V> {
 
     //("页码数")
-    private final long pageNo;
+    private long pageNo;
     //("页面大小")
-    private final long pageSize;
+    private long pageSize;
     //("总页数")
-    private final long pageTotal;
+    private long pageTotal;
     //("总记录数")
-    private final long total;
+    private long total;
     //("数据集")
-    private final List<V> list;
+    private List<V> list;
+
+    public PageResult() {
+    }
 
     public PageResult(PageInfo<V> pageInfo){
         this.pageNo = pageInfo.getPageNum();
