@@ -10,8 +10,13 @@ grass-parent:项目父类
 - grass-console:后台管理模块  
 - grass-admin:管理后台用户模块  
 
- 
+## 工作进度
+1. 2019.5.21  
+目前以及完成admin提供基础后台管理服务   
+以及console调用admin服务进行crud操作  
 
+2. 2019.5.22  
+进行用户权限模块设计
 
 ##问题解决
 
