@@ -17,6 +17,7 @@ public interface AdminService {
 
     PageResult<AdminVo> list(PageQuery<AdminVo> pageQuery);
 
+    AdminVo getAdminByUsernameAndPassword(String username,String password);
 
 
 }

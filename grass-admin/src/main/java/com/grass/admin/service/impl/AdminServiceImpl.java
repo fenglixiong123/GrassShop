@@ -10,6 +10,7 @@ import com.grass.admin.service.AdminService;
 import com.grass.api.vo.admin.AdminVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
+import com.grass.common.utils.CommonUtils;
 import com.grass.web.exception.element.ParamException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -93,5 +94,19 @@ public class AdminServiceImpl implements AdminService {
         });
 
         return new PageResult<>(pageInfo,adminVoList);
+    }
+
+    @Override
+    public AdminVo getAdminByUsernameAndPassword(String username, String password) {
+        AdminExample example = new AdminExample();
+        example.createCriteria().andUsernameEqualTo(username)
+                .andPasswordEqualTo(password);
+        List<Admin> adminList = adminDao.selectByExample(example);
+        if(CommonUtils.isNotEmpty(adminList)){
+            AdminVo adminVo = new AdminVo();
+            BeanUtils.copyProperties(adminList.get(0),adminVo);
+            return adminVo;
+        }
+        return null;
     }
 }

@@ -31,4 +31,7 @@ public interface IAdminService {
     @PostMapping("/admin/list")
     PageResult<AdminVo> list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery);
 
+    @PostMapping("/admin/getAdminByUsernameAndPassword")
+    AdminVo getAdminByUsernameAndPassword(@RequestParam("username") String username, @RequestParam("password") String password);
+
 }

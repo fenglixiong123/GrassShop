@@ -42,6 +42,10 @@ public class AdminServiceFallBack implements FallbackFactory<IAdminService> {
             public PageResult<AdminVo> list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery) {
                 return new PageResult<AdminVo>();
             }
+
+            public AdminVo getAdminByUsernameAndPassword(String username, String password) {
+                return new AdminVo(-99L,"default");
+            }
         };
     }
 

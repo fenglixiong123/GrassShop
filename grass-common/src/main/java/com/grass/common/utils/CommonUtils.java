@@ -2,6 +2,7 @@ package com.grass.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,6 +52,45 @@ public class CommonUtils {
 
     public static boolean isNotEmpty(Object[] params){
         return !isEmpty(params);
+    }
+
+    public static String getAlphabet(int i) {
+        String al = "ABCDEFGHIJKLMN";
+        return al.substring(i, i + 1);
+    }
+
+    public static String subStringBytesFromLeft(String s, int max_length) {
+        if (s.getBytes().length > max_length) {
+            char[] chars = s.toCharArray();
+            String ret = null;
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < chars.length; i++) {
+                sb.append(chars[i]);
+                int length = sb.toString().getBytes().length;
+                if (length > max_length - 3) {
+                    ret = new String(Arrays.copyOfRange(chars, 0, i)) + "...";
+                    break;
+                }
+            }
+            return ret;
+        } else {
+            return s;
+        }
+    }
+
+    public static String subStringBytesFromRight(String s, int subtract_length) {
+        char[] chars = s.toCharArray();
+        String ret = null;
+        StringBuffer sb = new StringBuffer();
+        for (int i = chars.length - 1; i >= 0; i--) {
+            sb.append(chars[i]);
+            int length = sb.toString().getBytes().length;
+            if (length >= subtract_length + 3) {
+                ret = new String(Arrays.copyOfRange(chars, 0, i)) + "...";
+                break;
+            }
+        }
+        return ret;
     }
 
 }
