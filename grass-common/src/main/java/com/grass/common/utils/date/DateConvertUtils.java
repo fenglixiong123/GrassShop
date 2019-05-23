@@ -94,6 +94,7 @@ public class DateConvertUtils
     }
 
 
+    @SuppressWarnings("all")
     public static Integer getSameMonth(String strDate, String fmt ,Integer num){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime( convertStringToDate( strDate, fmt ) );
