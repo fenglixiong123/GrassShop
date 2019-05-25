@@ -5,6 +5,7 @@ import com.grass.common.enums.ErrorMsgEnum;
 import com.grass.web.exception.element.BizException;
 import com.grass.web.exception.element.ParamException;
 import com.grass.common.result.ResultResponse;
+import com.grass.web.exception.element.UnAuthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.naming.NoPermissionException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -29,6 +31,34 @@ import javax.servlet.http.HttpServletRequest;
 public class CoreExceptionHandler implements InitializingBean {
 
     private static final Logger log = LoggerFactory.getLogger(CoreExceptionHandler.class);
+
+    /**
+     * 自定义认证异常类
+     * @param request
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(UnAuthorizedException.class)
+    public ResultResponse unAuthorizedExceptionHandler(HttpServletRequest request, Exception e){
+        log.error("【异常地址】：{}",request.getRequestURL().toString());
+        log.error("【异常类型】认证异常unAuthorizedException：{}",e);
+        return ResultResponse.error(ErrorMsgEnum.UN_LOGIN);
+    }
+
+    /**
+     * 自定义权限异常类
+     * @param request
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(NoPermissionException.class)
+    public ResultResponse accessForbiddenExceptionHandler(HttpServletRequest request, Exception e){
+        log.error("【异常地址】：{}",request.getRequestURL().toString());
+        log.error("【异常类型】权限异常noPermissionException：{}",e);
+        return ResultResponse.error(ErrorMsgEnum.NO_PERMISSION);
+    }
 
     /**
      * 自定义传参异常类

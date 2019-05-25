@@ -16,11 +16,10 @@ public enum ErrorMsgEnum {
     PARAM_MISSING(false, 400, "少参异常", "请求缺少参数了哦~"),
     PARAM_INVILAD(false, 600, "传参异常", "传参出现异常了哦~"),
     JSON_CONVERT_ERROR(false, 700, "JSON解析异常", "JSON解析出现异常了哦~"),
-    DATA_NO_COMPLETE(false, 5002, "数据填写不完整，请检查", "数据填写不完整，请检查"),
-    UN_LOGIN(false, 4001, "尚未登录", "请仔登录后查看哦~"),
+    UN_LOGIN(false, 4001, "尚未登录", "请登录后查看哦~"),
     LOGIN_LOCK(false, 4002, "用户禁用", "已被禁用请联系管理员处理~"),
     NO_PERMISSION(false, 4003, "暂无权限", "您现在暂无权限访问哦~"),
-    LOGIN_USERNAME_ERROR(false, 4004, "用户名或者密码错误", "请仔细检查用户名密码哦~");
+    LOGIN_ERROR(false, 4004, "用户名或者密码错误", "请仔细检查用户名密码哦~");
 
 
     private boolean status;

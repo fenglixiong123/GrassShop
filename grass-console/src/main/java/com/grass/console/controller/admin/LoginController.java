@@ -6,6 +6,7 @@ import com.grass.common.result.ResultResponse;
 import com.grass.common.utils.json.JsonUtils;
 import com.grass.console.service.ConsoleAdminService;
 import com.grass.console.vo.LoginFormVo;
+import com.grass.web.exception.element.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class LoginController {
             return ResultResponse.ok(token);
         }
         log.info("登录失败！");
-        return ResultResponse.error(ErrorMsgEnum.LOGIN_USERNAME_ERROR);
+        return ResultResponse.error(ErrorMsgEnum.LOGIN_ERROR);
     }
 
     @GetMapping("/userInfo")
