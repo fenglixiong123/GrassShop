@@ -28,7 +28,7 @@ public class ConsoleAdminServiceImpl implements ConsoleAdminService {
     public String loginByUsername(HttpServletRequest request,String username, String password) {
         AdminVo adminVo = adminService.getAdminByUsernameAndPassword(username, password);
         if(adminVo!=null){
-            String token = CodeUtils.getRandomCode(16);
+            String token = CodeUtils.getStringCode(16);
             HttpSession session = request.getSession();
             session.setAttribute(WebConstant.USER_TOKEN,token);
             session.setAttribute(WebConstant.USER_INFO,adminVo);

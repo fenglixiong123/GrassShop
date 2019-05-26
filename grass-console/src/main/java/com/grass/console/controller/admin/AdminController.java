@@ -32,9 +32,9 @@ public class AdminController {
      * 根据ID查询用户
      */
     @GetMapping("/{id}")
-    public AdminVo get(@PathVariable("id") Long id){
+    public ResultResponse get(@PathVariable("id") Long id){
         log.info("get---->id:{}",id);
-        return adminService.get(id);
+        return ResultResponse.ok(adminService.get(id));
     }
 
     /**
@@ -42,40 +42,40 @@ public class AdminController {
      */
     @Valid
     @PostMapping
-    public Long add(@RequestBody AdminVo adminVo){
+    public ResultResponse add(@RequestBody AdminVo adminVo){
         log.info("add---->adminVo:", JsonUtils.toJsonMsg(adminVo));
-        return adminService.add(adminVo);
+        return ResultResponse.ok(adminService.add(adminVo));
     }
 
     /**
      * 更新用户
      */
     @PutMapping
-    public int update(@RequestBody AdminVo adminVo){
+    public ResultResponse update(@RequestBody AdminVo adminVo){
         log.info("update---->adminVo:{}",JsonUtils.toJsonMsg(adminVo));
-        return adminService.update(adminVo);
+        return ResultResponse.ok(adminService.update(adminVo));
     }
 
     /**
      * 删除用户
      */
     @DeleteMapping("/{id}")
-    public int delete(@PathVariable("id") Long id){
+    public ResultResponse delete(@PathVariable("id") Long id){
         log.info("delete---->id:{}",id);
-        return adminService.delete(id);
+        return ResultResponse.ok(adminService.delete(id));
     }
 
     /**
      * 分页查询用户
      * @return
      */
-    @GetMapping("/list")
-    public PageResult<AdminVo> list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery){
+    @PostMapping("/list")
+    public ResultResponse list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery){
         log.info("list---->pageQuery:{}",JsonUtils.toJsonMsg(pageQuery));
         if(pageQuery==null){
             pageQuery = new PageQuery<>();
         }
-        return adminService.list(pageQuery);
+        return ResultResponse.ok(adminService.list(pageQuery));
     }
 
 }

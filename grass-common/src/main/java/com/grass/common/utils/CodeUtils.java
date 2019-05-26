@@ -9,7 +9,7 @@ import java.util.Random;
  **/
 public class CodeUtils {
 
-    public static int getRandomNumber(int min,int max){
+    public static int getRangeNumber(int min,int max){
         if(min<0){min = 0;}
         if(max<0){max = 0;}
         if(min>=max){min = 0;max = 10;}
@@ -54,26 +54,33 @@ public class CodeUtils {
         return sb.toString();
     }
 
+    public static String getNumberCode(int length){
+        String baseString = "1234567890";
+        return generateCode(length,baseString);
+    }
+
+    public static String getStringCode(int length){
+        String baseString = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ";
+        return generateCode(length,baseString);
+    }
+
+    public static String getSomeCode(int length){
+        String baseString = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ23456789";
+        return generateCode(length,baseString);
+    }
+
     /**
      * 只有数字的密码生成
      *
      * @param length
      * @return
      */
-    public static String generateRandomString(int length,boolean onlyNumber) {
-        String baseSeed;
-        if(onlyNumber){
-            baseSeed = new String("1234567890");
-        }else {
-            baseSeed = new String("abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ23456789");
-        }
+    private static String generateCode(int length,String baseSeed) {
         StringBuffer sb = new StringBuffer();
-        String ar = null;
         Random r = new Random();
-        int te = 0;
+        int te;
         for (int i = 1; i <= length; i++) {
             te = r.nextInt(baseSeed.length());
-            ar = ar + baseSeed.charAt(te);
             sb.append(baseSeed.charAt(te));
         }
         return sb.toString();
