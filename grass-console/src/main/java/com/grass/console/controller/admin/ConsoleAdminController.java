@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/console/admin")
-public class AdminController {
+public class ConsoleAdminController {
 
     @Autowired
     private IAdminService adminService;

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestController
 @RequestMapping("/console/admin")
-public class LoginController {
+public class ConsoleLoginController {
 
     @Autowired
     private ConsoleAdminService consoleAdminService;
