@@ -11,7 +11,6 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -76,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, `password`, nickname, icon, phone, email, sex, address, role_id, remark, 
-    `status`, create_time, update_time
+    id, username, `password`, nickname, icon, phone, email, sex, address, remark, `status`, 
+    create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.grass.admin.model.AdminExample" resultMap="BaseResultMap">
     select
@@ -120,14 +119,14 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Admin" useGeneratedKeys="true">
     insert into admin (username, `password`, nickname, 
       icon, phone, email, 
-      sex, address, role_id, 
-      remark, `status`, create_time, 
-      update_time)
+      sex, address, remark, 
+      `status`, create_time, update_time
+      )
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{icon,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{roleId,jdbcType=BIGINT}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{sex,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Admin" useGeneratedKeys="true">
     insert into admin
@@ -155,9 +154,6 @@
       </if>
       <if test="address != null">
         address,
-      </if>
-      <if test="roleId != null">
-        role_id,
       </if>
       <if test="remark != null">
         remark,
@@ -196,9 +192,6 @@
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=BIGINT},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -250,9 +243,6 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=BIGINT},
-      </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
@@ -281,7 +271,6 @@
       email = #{record.email,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=INTEGER},
       address = #{record.address,jdbcType=VARCHAR},
-      role_id = #{record.roleId,jdbcType=BIGINT},
       remark = #{record.remark,jdbcType=VARCHAR},
       `status` = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -317,9 +306,6 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=BIGINT},
-      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -345,7 +331,6 @@
       email = #{email,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=INTEGER},
       address = #{address,jdbcType=VARCHAR},
-      role_id = #{roleId,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

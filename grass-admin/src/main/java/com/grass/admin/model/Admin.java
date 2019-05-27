@@ -48,11 +48,6 @@ public class Admin implements Serializable {
     private String address;
 
     /**
-     * 角色ID
-     */
-    private Long roleId;
-
-    /**
      * 备注
      */
     private String remark;
@@ -140,14 +135,6 @@ public class Admin implements Serializable {
         this.address = address;
     }
 
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
     public String getRemark() {
         return remark;
     }
@@ -201,7 +188,6 @@ public class Admin implements Serializable {
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
@@ -221,7 +207,6 @@ public class Admin implements Serializable {
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-        result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
@@ -244,7 +229,6 @@ public class Admin implements Serializable {
         sb.append(", email=").append(email);
         sb.append(", sex=").append(sex);
         sb.append(", address=").append(address);
-        sb.append(", roleId=").append(roleId);
         sb.append(", remark=").append(remark);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);

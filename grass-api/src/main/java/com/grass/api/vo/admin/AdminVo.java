@@ -55,11 +55,6 @@ public class AdminVo {
     private String address;
 
     /**
-     * 角色ID
-     */
-    private Long roleId;
-
-    /**
      * 备注
      */
     private String remark;
