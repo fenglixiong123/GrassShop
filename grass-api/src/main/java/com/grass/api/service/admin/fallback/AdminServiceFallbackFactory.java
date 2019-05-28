@@ -1,6 +1,8 @@
-package com.grass.api.service.admin;
+package com.grass.api.service.admin.fallback;
 
+import com.grass.api.service.admin.IAdminService;
 import com.grass.api.vo.admin.AdminVo;
+import com.grass.api.vo.power.PowerVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import feign.hystrix.FallbackFactory;
@@ -8,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +21,7 @@ import java.util.List;
  **/
 @Slf4j
 @Component
-public class AdminServiceFallBack implements FallbackFactory<IAdminService> {
+public class AdminServiceFallbackFactory implements FallbackFactory<IAdminService> {
 
     public IAdminService create(Throwable throwable) {
         return new IAdminService() {
@@ -45,6 +48,10 @@ public class AdminServiceFallBack implements FallbackFactory<IAdminService> {
 
             public AdminVo getAdminByUsernameAndPassword(String username, String password) {
                 return new AdminVo(-99L,"default");
+            }
+
+            public List<PowerVo> findPowerByAdminId(Long id) {
+                return new ArrayList<PowerVo>();
             }
         };
     }
