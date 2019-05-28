@@ -6,8 +6,13 @@ import java.util.List;
 
 public interface PowerService {
 
-    List<PowerVo> getListByPowerIds(List<Integer> powIds);
+    List<PowerVo> findList();
 
-    List<PowerVo> getPowerListByAdminId(Long adminId);
+    List<PowerVo> findListByAdminId(Long adminId);
 
+    List<PowerVo> findListByRoleId(Integer roleId);
+
+    List<PowerVo> findListByRoleIds(List<Integer> roleIds);
+
+    List<PowerVo> findListByPowerIds(List<Integer> powIds);
 }

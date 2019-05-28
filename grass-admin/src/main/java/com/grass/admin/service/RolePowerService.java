@@ -11,12 +11,12 @@ import java.util.List;
  **/
 public interface RolePowerService {
 
-    List<RolePower> getListByRoleId(int roleId);
+    List<RolePower> findListByRoleId(int roleId);
 
-    List<RolePower> getListByRoleIds(List<Integer> roleIds);
+    List<RolePower> findListByRoleIds(List<Integer> roleIds);
 
-    List<Integer> getPowerIdsByRoleId(int roleId);
+    List<Integer> findPowerIdsByRoleId(int roleId);
 
-    List<Integer> getPowerIdsByRoleId(List<Integer> roleIds);
+    List<Integer> findPowerIdsByRoleIds(List<Integer> roleIds);
 
 }

@@ -24,20 +24,35 @@ public class RolePowerServiceImpl implements RolePowerService {
     @Autowired
     private RolePowerDao rolePowerDao;
 
-    public List<RolePower> getListByRoleId(int roleId){
+    /**
+     * 通过角色ID获取角色权限列表
+     * @param roleId
+     * @return
+     */
+    public List<RolePower> findListByRoleId(int roleId){
         RolePowerExample example = new RolePowerExample();
         example.createCriteria().andRoleIdEqualTo(roleId);
         return rolePowerDao.selectByExample(example);
     }
 
-    public List<RolePower> getListByRoleIds(List<Integer> roleIds){
+    /**
+     * 通过角色ID集合获得角色权限列表
+     * @param roleIds
+     * @return
+     */
+    public List<RolePower> findListByRoleIds(List<Integer> roleIds){
         RolePowerExample example = new RolePowerExample();
         example.createCriteria().andRoleIdIn(roleIds);
         return rolePowerDao.selectByExample(example);
     }
 
-    public List<Integer> getPowerIdsByRoleId(int roleId){
-        List<RolePower> rolePowers = getListByRoleId(roleId);
+    /**
+     * 通过角色ID获得权限列表ID
+     * @param roleId
+     * @return
+     */
+    public List<Integer> findPowerIdsByRoleId(int roleId){
+        List<RolePower> rolePowers = findListByRoleId(roleId);
         List<Integer> powerIds = new ArrayList<>();
         for (RolePower rolePower:rolePowers){
             powerIds.add(rolePower.getPowerId());
@@ -45,11 +60,16 @@ public class RolePowerServiceImpl implements RolePowerService {
         return powerIds;
     }
 
-    public List<Integer> getPowerIdsByRoleId(List<Integer> roleIds){
+    /**
+     * 通过角色IDS获得权限列表ID
+     * @param roleIds
+     * @return
+     */
+    public List<Integer> findPowerIdsByRoleIds(List<Integer> roleIds){
         if(CommonUtils.isEmpty(roleIds)){
             return null;
         }
-        List<RolePower> rolePowers = getListByRoleIds(roleIds);
+        List<RolePower> rolePowers = findListByRoleIds(roleIds);
         List<Integer> powerIds = new ArrayList<>();
         for (RolePower rolePower:rolePowers){
             powerIds.add(rolePower.getPowerId());

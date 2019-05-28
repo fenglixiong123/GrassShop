@@ -25,9 +25,10 @@ public class PowerController {
     @Autowired
     private PowerService powerService;
 
-    @GetMapping("/listByAdmin")
-    public List<PowerVo> listByAdmin(@RequestParam Long id){
-        return powerService.getPowerListByAdminId(id);
+    @GetMapping("/listByAdminId")
+    public List<PowerVo> listByAdminId(@RequestParam Long id){
+        log.info("listByAdminId---------->id:{}",id);
+        return powerService.findListByAdminId(id);
     }
 
 }

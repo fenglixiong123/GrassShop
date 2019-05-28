@@ -7,6 +7,7 @@ import com.grass.admin.dao.AdminDao;
 import com.grass.admin.model.Admin;
 import com.grass.admin.model.AdminExample;
 import com.grass.admin.service.AdminService;
+import com.grass.admin.utils.CopyUtil;
 import com.grass.api.vo.admin.AdminVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
@@ -18,7 +19,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +36,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminVo get(Long id) {
-        AdminVo adminVo = new AdminVo();
-        Admin admin = adminDao.selectByPrimaryKey(id);
-        BeanUtils.copyProperties(admin,adminVo);
-        return adminVo;
+        return CopyUtil.copyAdminEntity(adminDao.selectByPrimaryKey(id));
     }
 
     @Override
@@ -86,14 +83,8 @@ public class AdminServiceImpl implements AdminService {
         }
         List<Admin> adminList =adminDao.selectByExample(example);
         PageInfo<Admin> pageInfo =new PageInfo<>(page);
-        List<AdminVo> adminVoList = new ArrayList<>();
-        adminList.forEach(admin->{
-            AdminVo adminVo = new AdminVo();
-            BeanUtils.copyProperties(admin,adminVo);
-            adminVoList.add(adminVo);
-        });
 
-        return new PageResult<>(pageInfo,adminVoList);
+        return new PageResult<>(pageInfo, CopyUtil.copyAdminEntity(adminList));
     }
 
     @Override
@@ -103,9 +94,7 @@ public class AdminServiceImpl implements AdminService {
                 .andPasswordEqualTo(password);
         List<Admin> adminList = adminDao.selectByExample(example);
         if(CommonUtils.isNotEmpty(adminList)){
-            AdminVo adminVo = new AdminVo();
-            BeanUtils.copyProperties(adminList.get(0),adminVo);
-            return adminVo;
+            return CopyUtil.copyAdminEntity(adminList.get(0));
         }
         return null;
     }

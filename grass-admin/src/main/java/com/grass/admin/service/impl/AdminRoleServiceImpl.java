@@ -24,32 +24,24 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     @Autowired
     private AdminRoleDao adminRoleDao;
 
-    public List<AdminRole> getListByAdminId(Long adminId){
+    /**
+     * 通过adminID获取用户角色列表
+     * @param adminId
+     * @return
+     */
+    public List<AdminRole> findListByAdminId(Long adminId){
         AdminRoleExample example = new AdminRoleExample();
         example.createCriteria().andAdminIdEqualTo(adminId);
         return adminRoleDao.selectByExample(example);
     }
 
-    public List<AdminRole> getListByAdminIds(List<Long> adminIds){
-        AdminRoleExample example = new AdminRoleExample();
-        example.createCriteria().andAdminIdIn(adminIds);
-        return adminRoleDao.selectByExample(example);
-    }
-
-    public List<Integer> getRoleIdsByAdminId(Long adminId){
-        List<AdminRole> adminRoles = getListByAdminId(adminId);
-        List<Integer> roleIds = new ArrayList<>();
-        for(AdminRole adminRole:adminRoles){
-            roleIds.add(adminRole.getRoleId());
-        }
-        return roleIds;
-    }
-
-    public List<Integer> getRoleIdsByAdminIds(List<Long> adminIds){
-        if(CommonUtils.isEmpty(adminIds)){
-            return null;
-        }
-        List<AdminRole> adminRoles = getListByAdminIds(adminIds);
+    /**
+     * 通过用户ID获取角色列表ids
+     * @param adminId
+     * @return
+     */
+    public List<Integer> findRoleIdsByAdminId(Long adminId){
+        List<AdminRole> adminRoles = findListByAdminId(adminId);
         List<Integer> roleIds = new ArrayList<>();
         for(AdminRole adminRole:adminRoles){
             roleIds.add(adminRole.getRoleId());
