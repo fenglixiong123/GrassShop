@@ -2,6 +2,8 @@ package com.grass.api.vo.admin;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Author Fenglixiong
  * @Create 2019/5/28 0:18
@@ -36,5 +38,10 @@ public class PowerVo {
      * 权限备注
      */
     private String remark;
+
+    /**
+     * 子集权限
+     */
+    private List<PowerVo> children;
 
 }

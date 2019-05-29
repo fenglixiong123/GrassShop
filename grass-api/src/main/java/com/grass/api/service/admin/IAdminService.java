@@ -42,11 +42,17 @@ public interface IAdminService {
     //---------------------------------------------------------------------------------------
 
     //通过adminId获取菜单集合
-    @GetMapping("/findMenuByAdminId")
-    List<MenuVo> findMenuByAdminId(@RequestParam("id") Long id);
+    @GetMapping("/admin/menu/findMenuListByAdminId")
+    List<MenuVo> findMenuListByAdminId(@RequestParam("id") Long id);
+
+    @GetMapping("/admin/menu/findMenuTreeByAdminId")
+    List<MenuVo> findMenuTreeByAdminId(@RequestParam("id") Long id);
 
     //通过adminId获取权限集合
-    @GetMapping("/admin/power/findPowerByAdminId")
-    List<PowerVo> findPowerByAdminId(@RequestParam("id") Long id);
+    @GetMapping("/admin/power/findPowerListByAdminId")
+    List<PowerVo> findPowerListByAdminId(@RequestParam("id") Long id);
+
+    @GetMapping("/admin/power/findPowerTreeByAdminId")
+    List<PowerVo> findPowerTreeByAdminId(@RequestParam("id") Long id);
 
 }

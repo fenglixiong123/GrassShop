@@ -2,6 +2,7 @@ package com.grass.api.service.admin.fallback;
 
 import com.grass.api.service.admin.IAdminService;
 import com.grass.api.vo.admin.AdminVo;
+import com.grass.api.vo.admin.MenuVo;
 import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
@@ -47,6 +48,10 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
 
             public AdminVo getAdminByUsernameAndPassword(String username, String password) {
                 return new AdminVo(-99L,"default");
+            }
+
+            public List<MenuVo> findMenuByAdminId(Long id) {
+                return null;
             }
 
             public List<PowerVo> findPowerByAdminId(Long id) {

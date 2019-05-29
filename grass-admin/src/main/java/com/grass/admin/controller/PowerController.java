@@ -1,6 +1,7 @@
 package com.grass.admin.controller;
 
 import com.grass.admin.service.PowerService;
+import com.grass.admin.utils.ConvertTreeUtil;
 import com.grass.api.vo.admin.PowerVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,16 @@ public class PowerController {
     @Autowired
     private PowerService powerService;
 
-    @GetMapping("/findPowerByAdminId")
-    public List<PowerVo> findPowerByAdminId(@RequestParam("id") Long id){
-        log.info("findPowerByAdminId---------->id:{}",id);
+    @GetMapping("/findPowerListByAdminId")
+    public List<PowerVo> findPowerListByAdminId(@RequestParam("id") Long id){
+        log.info("findPowerListByAdminId---------->id:{}",id);
         return powerService.findListByAdminId(id);
+    }
+
+    @GetMapping("/findPowerByAdminId")
+    public List<PowerVo> findPowerTreeByAdminId(@RequestParam("id") Long id){
+        log.info("findPowerTreeByAdminId---------->id:{}",id);
+        return ConvertTreeUtil.listToTreePower(powerService.findListByAdminId(id));
     }
 
 }

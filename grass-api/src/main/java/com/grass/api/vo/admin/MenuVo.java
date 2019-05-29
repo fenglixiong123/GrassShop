@@ -3,6 +3,8 @@ package com.grass.api.vo.admin;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @Author Fenglixiong
  * @Create 2019/5/29 22:42
@@ -43,5 +45,10 @@ public class MenuVo {
      * 备注
      */
     private String remark;
+
+    /**
+     * 子集菜单
+     */
+    private List<MenuVo> children;
 
 }

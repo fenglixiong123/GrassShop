@@ -1,6 +1,7 @@
 package com.grass.admin.controller;
 
 import com.grass.admin.service.MenuService;
+import com.grass.admin.utils.ConvertTreeUtil;
 import com.grass.api.vo.admin.MenuVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,16 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    @GetMapping("/findMenuByAdminId")
-    public List<MenuVo> findMenuByAdminId(@RequestParam("id") Long id){
-        log.info("findMenuByAdminId---------->id:{}",id);
+    @GetMapping("/findMenuListByAdminId")
+    public List<MenuVo> findMenuListByAdminId(@RequestParam("id") Long id){
+        log.info("findMenuListByAdminId---------->id:{}",id);
         return menuService.findListByAdminId(id);
+    }
+
+    @GetMapping("/findMenuTreeByAdminId")
+    public List<MenuVo> findMenuTreeByAdminId(@RequestParam("id") Long id){
+        log.info("findMenuTreeByAdminId---------->id:{}",id);
+        return ConvertTreeUtil.listToTreeMenu(menuService.findListByAdminId(id));
     }
     
 }

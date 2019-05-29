@@ -11,27 +11,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author Fenglixiong
- * @Create 2019/5/28 23:56
+ * @Create 2019/5/30 0:21
  * @Description
  **/
 @Slf4j
 @RestController
 @RequestMapping("/console/admin")
-public class ConsolePowerController {
+public class ConsoleMenuController {
 
     @Autowired
     private IAdminService adminService;
 
-    @GetMapping("/findPowerListByAdminId")
-    public ResultResponse findPowerListByAdminId(@RequestParam Long id){
-        log.info("findPowerListByAdminId------------->id:{}",id);
-        return ResultResponse.ok(adminService.findPowerListByAdminId(id));
+    @GetMapping("/findMenuListByAdminId")
+    public ResultResponse findMenuListByAdminId(@RequestParam Long id){
+        log.info("findMenuListByAdminId------------->id:{}",id);
+        return ResultResponse.ok(adminService.findMenuListByAdminId(id));
     }
 
-    @GetMapping("/findPowerTreeByAdminId")
-    public ResultResponse findPowerTreeByAdminId(@RequestParam Long id){
-        log.info("findPowerTreeByAdminId------------->id:{}",id);
-        return ResultResponse.ok(adminService.findPowerTreeByAdminId(id));
+    @GetMapping("/findMenuTreeByAdminId")
+    public ResultResponse findMenuTreeByAdminId(@RequestParam Long id){
+        log.info("findMenuTreeByAdminId------------->id:{}",id);
+        return ResultResponse.ok(adminService.findMenuTreeByAdminId(id));
     }
+
 
 }
