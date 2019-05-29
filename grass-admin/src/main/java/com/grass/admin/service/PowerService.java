@@ -1,6 +1,6 @@
 package com.grass.admin.service;
 
-import com.grass.api.vo.power.PowerVo;
+import com.grass.api.vo.admin.PowerVo;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.grass.admin.service;
 
-import com.grass.api.vo.role.RoleVo;
+import com.grass.api.vo.admin.RoleVo;
 
 import java.util.List;
 

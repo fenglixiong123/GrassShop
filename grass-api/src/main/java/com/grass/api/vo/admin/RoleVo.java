@@ -1,4 +1,4 @@
-package com.grass.api.vo.role;
+package com.grass.api.vo.admin;
 
 import lombok.Data;
 

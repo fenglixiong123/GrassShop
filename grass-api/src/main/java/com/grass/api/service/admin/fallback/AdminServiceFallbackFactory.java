@@ -2,7 +2,7 @@ package com.grass.api.service.admin.fallback;
 
 import com.grass.api.service.admin.IAdminService;
 import com.grass.api.vo.admin.AdminVo;
-import com.grass.api.vo.power.PowerVo;
+import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import feign.hystrix.FallbackFactory;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

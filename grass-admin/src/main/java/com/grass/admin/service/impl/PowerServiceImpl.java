@@ -7,7 +7,7 @@ import com.grass.admin.service.AdminRoleService;
 import com.grass.admin.service.PowerService;
 import com.grass.admin.service.RolePowerService;
 import com.grass.admin.utils.CopyUtil;
-import com.grass.api.vo.power.PowerVo;
+import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

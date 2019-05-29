@@ -1,11 +1,13 @@
 package com.grass.admin.utils;
 
 import com.grass.admin.model.Admin;
+import com.grass.admin.model.Menu;
 import com.grass.admin.model.Power;
 import com.grass.admin.model.Role;
 import com.grass.api.vo.admin.AdminVo;
-import com.grass.api.vo.power.PowerVo;
-import com.grass.api.vo.role.RoleVo;
+import com.grass.api.vo.admin.MenuVo;
+import com.grass.api.vo.admin.PowerVo;
+import com.grass.api.vo.admin.RoleVo;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
@@ -64,6 +66,22 @@ public class CopyUtil {
             powerVos.add(powerVo);
         }
         return powerVos;
+    }
+
+    public static MenuVo copyMenuEntity(Menu menu){
+        MenuVo menuVo = new MenuVo();
+        BeanUtils.copyProperties(menu,menuVo);
+        return menuVo;
+    }
+
+    public static List<MenuVo> copyMenuEntity(List<Menu> menus){
+        List<MenuVo> menuVos = new ArrayList<>();
+        for (Menu menu : menus){
+            MenuVo menuVo = new MenuVo();
+            BeanUtils.copyProperties(menu,menuVo);
+            menuVos.add(menuVo);
+        }
+        return menuVos;
     }
 
 }

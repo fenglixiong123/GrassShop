@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.grass.admin.dao.PowerDao">
-  <resultMap id="BaseResultMap" type="com.grass.admin.model.Power">
+<mapper namespace="com.grass.admin.dao.MenuDao">
+  <resultMap id="BaseResultMap" type="com.grass.admin.model.Menu">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="order" jdbcType="INTEGER" property="order" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, `path`, remark
+    id, title, parent_id, `path`, icon, `order`, remark
   </sql>
-  <select id="selectByExample" parameterType="com.grass.admin.model.PowerExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.grass.admin.model.MenuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from power
+    from menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,33 +96,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from power
+    from menu
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from power
+    delete from menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.grass.admin.model.PowerExample">
-    delete from power
+  <delete id="deleteByExample" parameterType="com.grass.admin.model.MenuExample">
+    delete from menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Power" useGeneratedKeys="true">
-    insert into power (title, `path`, remark
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Menu" useGeneratedKeys="true">
+    insert into menu (title, parent_id, `path`, 
+      icon, `order`, remark
       )
-    values (#{title,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+    values (#{title,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Power" useGeneratedKeys="true">
-    insert into power
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Menu" useGeneratedKeys="true">
+    insert into menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="title != null">
         title,
       </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
       <if test="path != null">
         `path`,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="order != null">
+        `order`,
       </if>
       <if test="remark != null">
         remark,
@@ -129,22 +143,31 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
       <if test="path != null">
         #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.grass.admin.model.PowerExample" resultType="java.lang.Long">
-    select count(*) from power
+  <select id="countByExample" parameterType="com.grass.admin.model.MenuExample" resultType="java.lang.Long">
+    select count(*) from menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update power
+    update menu
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -152,8 +175,17 @@
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
       <if test="record.path != null">
         `path` = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.order != null">
+        `order` = #{record.order,jdbcType=INTEGER},
       </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
@@ -164,23 +196,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update power
+    update menu
     set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
       `path` = #{record.path,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      `order` = #{record.order,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.grass.admin.model.Power">
-    update power
+  <update id="updateByPrimaryKeySelective" parameterType="com.grass.admin.model.Menu">
+    update menu
     <set>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
       <if test="path != null">
         `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        `order` = #{order,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
@@ -188,10 +232,13 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.grass.admin.model.Power">
-    update power
+  <update id="updateByPrimaryKey" parameterType="com.grass.admin.model.Menu">
+    update menu
     set title = #{title,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
       `path` = #{path,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      `order` = #{order,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -1,4 +1,4 @@
-package com.grass.api.vo.power;
+package com.grass.api.vo.admin;
 
 import lombok.Data;
 
@@ -21,11 +21,6 @@ public class PowerVo {
      * 权限路径
      */
     private String path;
-
-    /**
-     * 父级权限菜单ID
-     */
-    private Integer parentId;
 
     /**
      * 权限备注

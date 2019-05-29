@@ -2,7 +2,7 @@ package com.grass.api.service.admin;
 
 import com.grass.api.service.admin.fallback.AdminServiceFallbackFactory;
 import com.grass.api.vo.admin.AdminVo;
-import com.grass.api.vo.power.PowerVo;
+import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.constants.AppConstant;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
