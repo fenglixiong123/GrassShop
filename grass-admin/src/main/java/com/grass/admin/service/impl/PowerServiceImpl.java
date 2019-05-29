@@ -76,15 +76,15 @@ public class PowerServiceImpl implements PowerService {
 
     /**
      * 通过powerIds获取权限列表
-     * @param powIds
+     * @param powerIds
      * @return
      */
-    public List<PowerVo> findListByPowerIds(List<Integer> powIds){
-        if(CommonUtils.isEmpty(powIds)){
+    public List<PowerVo> findListByPowerIds(List<Integer> powerIds){
+        if(CommonUtils.isEmpty(powerIds)){
             return null;
         }
         PowerExample example = new PowerExample();
-        example.createCriteria().andIdIn(powIds);
+        example.createCriteria().andIdIn(powerIds);
         List<Power> powers = powerDao.selectByExample(example);
         return CopyUtil.copyPowerEntity(powers);
     }

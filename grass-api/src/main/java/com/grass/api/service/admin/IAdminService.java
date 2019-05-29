@@ -2,6 +2,7 @@ package com.grass.api.service.admin;
 
 import com.grass.api.service.admin.fallback.AdminServiceFallbackFactory;
 import com.grass.api.vo.admin.AdminVo;
+import com.grass.api.vo.admin.MenuVo;
 import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.constants.AppConstant;
 import com.grass.common.page.PageQuery;
@@ -40,6 +41,11 @@ public interface IAdminService {
 
     //---------------------------------------------------------------------------------------
 
+    //通过adminId获取菜单集合
+    @GetMapping("/findMenuByAdminId")
+    List<MenuVo> findMenuByAdminId(@RequestParam("id") Long id);
+
+    //通过adminId获取权限集合
     @GetMapping("/admin/power/findPowerByAdminId")
     List<PowerVo> findPowerByAdminId(@RequestParam("id") Long id);
 

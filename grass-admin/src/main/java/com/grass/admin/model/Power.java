@@ -20,6 +20,16 @@ public class Power implements Serializable {
     private String path;
 
     /**
+     * GET/POST/PUT/DELETE
+     */
+    private String method;
+
+    /**
+     * 展示用的
+     */
+    private Integer parentId;
+
+    /**
      * 权限备注
      */
     private String remark;
@@ -50,6 +60,22 @@ public class Power implements Serializable {
         this.path = path;
     }
 
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -73,6 +99,8 @@ public class Power implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
             && (this.getPath() == null ? other.getPath() == null : this.getPath().equals(other.getPath()))
+            && (this.getMethod() == null ? other.getMethod() == null : this.getMethod().equals(other.getMethod()))
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()));
     }
 
@@ -83,6 +111,8 @@ public class Power implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
         result = prime * result + ((getPath() == null) ? 0 : getPath().hashCode());
+        result = prime * result + ((getMethod() == null) ? 0 : getMethod().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         return result;
     }
@@ -96,6 +126,8 @@ public class Power implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", title=").append(title);
         sb.append(", path=").append(path);
+        sb.append(", method=").append(method);
+        sb.append(", parentId=").append(parentId);
         sb.append(", remark=").append(remark);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

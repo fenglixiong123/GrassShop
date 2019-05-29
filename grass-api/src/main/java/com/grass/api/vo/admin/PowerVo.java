@@ -23,6 +23,16 @@ public class PowerVo {
     private String path;
 
     /**
+     * GET/POST/PUT/DELETE
+     */
+    private String method;
+
+    /**
+     * 展示用的
+     */
+    private Integer parentId;
+
+    /**
      * 权限备注
      */
     private String remark;

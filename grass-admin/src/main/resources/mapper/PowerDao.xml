@@ -5,6 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, `path`, remark
+    id, title, `path`, `method`, parent_id, remark
   </sql>
   <select id="selectByExample" parameterType="com.grass.admin.model.PowerExample" resultMap="BaseResultMap">
     select
@@ -107,10 +109,10 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Power" useGeneratedKeys="true">
-    insert into power (title, `path`, remark
-      )
-    values (#{title,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
-      )
+    insert into power (title, `path`, `method`, 
+      parent_id, remark)
+    values (#{title,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.grass.admin.model.Power" useGeneratedKeys="true">
     insert into power
@@ -120,6 +122,12 @@
       </if>
       <if test="path != null">
         `path`,
+      </if>
+      <if test="method != null">
+        `method`,
+      </if>
+      <if test="parentId != null">
+        parent_id,
       </if>
       <if test="remark != null">
         remark,
@@ -131,6 +139,12 @@
       </if>
       <if test="path != null">
         #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -155,6 +169,12 @@
       <if test="record.path != null">
         `path` = #{record.path,jdbcType=VARCHAR},
       </if>
+      <if test="record.method != null">
+        `method` = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
@@ -168,6 +188,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       `path` = #{record.path,jdbcType=VARCHAR},
+      `method` = #{record.method,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -182,6 +204,12 @@
       <if test="path != null">
         `path` = #{path,jdbcType=VARCHAR},
       </if>
+      <if test="method != null">
+        `method` = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -192,6 +220,8 @@
     update power
     set title = #{title,jdbcType=VARCHAR},
       `path` = #{path,jdbcType=VARCHAR},
+      `method` = #{method,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

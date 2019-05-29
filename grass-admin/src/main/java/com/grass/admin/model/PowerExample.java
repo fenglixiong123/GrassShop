@@ -324,6 +324,136 @@ public class PowerExample {
             return (Criteria) this;
         }
 
+        public Criteria andMethodIsNull() {
+            addCriterion("`method` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodIsNotNull() {
+            addCriterion("`method` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodEqualTo(String value) {
+            addCriterion("`method` =", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodNotEqualTo(String value) {
+            addCriterion("`method` <>", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodGreaterThan(String value) {
+            addCriterion("`method` >", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodGreaterThanOrEqualTo(String value) {
+            addCriterion("`method` >=", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodLessThan(String value) {
+            addCriterion("`method` <", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodLessThanOrEqualTo(String value) {
+            addCriterion("`method` <=", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodLike(String value) {
+            addCriterion("`method` like", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodNotLike(String value) {
+            addCriterion("`method` not like", value, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodIn(List<String> values) {
+            addCriterion("`method` in", values, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodNotIn(List<String> values) {
+            addCriterion("`method` not in", values, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodBetween(String value1, String value2) {
+            addCriterion("`method` between", value1, value2, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andMethodNotBetween(String value1, String value2) {
+            addCriterion("`method` not between", value1, value2, "method");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdIsNull() {
+            addCriterion("parent_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdIsNotNull() {
+            addCriterion("parent_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdEqualTo(Integer value) {
+            addCriterion("parent_id =", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdNotEqualTo(Integer value) {
+            addCriterion("parent_id <>", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdGreaterThan(Integer value) {
+            addCriterion("parent_id >", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("parent_id >=", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdLessThan(Integer value) {
+            addCriterion("parent_id <", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("parent_id <=", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdIn(List<Integer> values) {
+            addCriterion("parent_id in", values, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdNotIn(List<Integer> values) {
+            addCriterion("parent_id not in", values, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdBetween(Integer value1, Integer value2) {
+            addCriterion("parent_id between", value1, value2, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("parent_id not between", value1, value2, "parentId");
+            return (Criteria) this;
+        }
+
         public Criteria andRemarkIsNull() {
             addCriterion("remark is null");
             return (Criteria) this;
