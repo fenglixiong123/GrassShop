@@ -21,21 +21,27 @@ import java.util.List;
 @FeignClient(value = AppConstant.GRASS_ADMIN,fallbackFactory = AdminServiceFallbackFactory.class)
 public interface IAdminService {
 
+    //根据adminId获取用户详情
     @GetMapping("/admin/{id}")
     AdminVo get(@PathVariable("id") Long id);
 
+    //添加用户
     @PostMapping("/admin")
     Long add(@RequestBody AdminVo adminVo);
 
+    //修改用户
     @PutMapping("/admin")
     int update(@RequestBody AdminVo adminVo);
 
+    //删除用户
     @DeleteMapping("/admin/{id}")
     int delete(@PathVariable("id") Long id);
 
+    //用户列表带分页
     @PostMapping("/admin/list")
     PageResult<AdminVo> list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery);
 
+    //根据用户名密码查询用户
     @PostMapping("/admin/getAdminByUsernameAndPassword")
     AdminVo getAdminByUsernameAndPassword(@RequestParam("username") String username, @RequestParam("password") String password);
 
@@ -45,6 +51,7 @@ public interface IAdminService {
     @GetMapping("/admin/menu/findMenuListByAdminId")
     List<MenuVo> findMenuListByAdminId(@RequestParam("id") Long id);
 
+    //通过adminId获取菜单树
     @GetMapping("/admin/menu/findMenuTreeByAdminId")
     List<MenuVo> findMenuTreeByAdminId(@RequestParam("id") Long id);
 
@@ -52,6 +59,7 @@ public interface IAdminService {
     @GetMapping("/admin/power/findPowerListByAdminId")
     List<PowerVo> findPowerListByAdminId(@RequestParam("id") Long id);
 
+    //通过adminId获取权限树
     @GetMapping("/admin/power/findPowerTreeByAdminId")
     List<PowerVo> findPowerTreeByAdminId(@RequestParam("id") Long id);
 
