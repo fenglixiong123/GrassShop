@@ -50,13 +50,23 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
                 return new AdminVo(-99L,"default");
             }
 
-            public List<MenuVo> findMenuByAdminId(Long id) {
+            public List<MenuVo> findMenuListByAdminId(Long id) {
                 return null;
             }
 
-            public List<PowerVo> findPowerByAdminId(Long id) {
-                return new ArrayList<PowerVo>();
+            public List<MenuVo> findMenuTreeByAdminId(Long id) {
+                return null;
             }
+
+            public List<PowerVo> findPowerListByAdminId(Long id) {
+                return null;
+            }
+
+            public List<PowerVo> findPowerTreeByAdminId(Long id) {
+                return null;
+            }
+
+
         };
     }
 
