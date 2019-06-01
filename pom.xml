@@ -14,6 +14,7 @@
         <module>grass-common</module>
         <module>grass-parent</module>
         <module>grass-console</module>
+        <module>grass-admin</module>
         <module>grass-web</module>
         <module>grass-eureka</module>
         <module>grass-api</module>
