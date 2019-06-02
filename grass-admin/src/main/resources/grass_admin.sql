@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : 127.0.0.1
 Source Server Version : 50720
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : grass_admin
 
 Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2019-05-30 00:26:59
+Date: 2019-06-03 00:23:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin
@@ -71,25 +71,26 @@ CREATE TABLE `menu` (
   `order` int(11) DEFAULT NULL COMMENT '菜单排序',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', '主页根', '0', '/home', null, null, null);
-INSERT INTO `menu` VALUES ('2', '主页', '1', '/home/house', null, null, '主页');
+INSERT INTO `menu` VALUES ('1', '主页', '0', '/home', null, null, '主页');
+INSERT INTO `menu` VALUES ('2', '相册', '1', '/home/picture', null, null, '相册');
 INSERT INTO `menu` VALUES ('3', '时光', '1', '/home/time', null, null, '时光');
 INSERT INTO `menu` VALUES ('4', '用户', '1', '/home/admin', null, null, '用户');
 INSERT INTO `menu` VALUES ('5', '指南', '1', '/home/guide', null, null, '指南');
 INSERT INTO `menu` VALUES ('6', '设置', '1', '/home/setting', null, null, '设置');
-INSERT INTO `menu` VALUES ('7', '7', '0', null, null, null, null);
-INSERT INTO `menu` VALUES ('8', '8', '7', null, null, null, null);
-INSERT INTO `menu` VALUES ('9', '9', '7', null, null, null, null);
-INSERT INTO `menu` VALUES ('10', '10', '0', null, null, null, null);
-INSERT INTO `menu` VALUES ('11', '11', '10', null, null, null, null);
-INSERT INTO `menu` VALUES ('12', '12', '10', null, null, null, null);
-INSERT INTO `menu` VALUES ('13', '13', '8', null, null, null, null);
-INSERT INTO `menu` VALUES ('14', '14', '11', null, null, null, null);
+INSERT INTO `menu` VALUES ('7', '新闻', '0', '/news', null, null, '新闻');
+INSERT INTO `menu` VALUES ('8', '中国新闻', '7', '/news/china', null, null, '中国新闻');
+INSERT INTO `menu` VALUES ('9', '美国新闻', '7', '/news/america', null, null, '美国新闻');
+INSERT INTO `menu` VALUES ('10', '股票', '0', '/stock', null, null, '股票');
+INSERT INTO `menu` VALUES ('11', '上海股票', '10', '/stock/shanghai', null, null, '上海股票');
+INSERT INTO `menu` VALUES ('12', '深圳股票', '10', '/stock/shenzhen', null, null, '深圳股票');
+INSERT INTO `menu` VALUES ('13', '中国财经新闻', '8', '/news/china/caijing', null, null, '中国财经新闻');
+INSERT INTO `menu` VALUES ('14', '上海新三板', '11', '/stock/shanghai/three', null, null, '上海新三板');
+INSERT INTO `menu` VALUES ('15', '测试页面', '0', '/test', null, null, '测试页面');
 
 -- ----------------------------
 -- Table structure for power
@@ -140,11 +141,26 @@ CREATE TABLE `role_menu` (
   `role_id` int(11) DEFAULT NULL,
   `menu_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_menu
 -- ----------------------------
+INSERT INTO `role_menu` VALUES ('1', '1', '1');
+INSERT INTO `role_menu` VALUES ('2', '1', '2');
+INSERT INTO `role_menu` VALUES ('3', '1', '3');
+INSERT INTO `role_menu` VALUES ('4', '1', '4');
+INSERT INTO `role_menu` VALUES ('5', '1', '5');
+INSERT INTO `role_menu` VALUES ('6', '1', '6');
+INSERT INTO `role_menu` VALUES ('7', '1', '7');
+INSERT INTO `role_menu` VALUES ('8', '1', '8');
+INSERT INTO `role_menu` VALUES ('9', '1', '9');
+INSERT INTO `role_menu` VALUES ('10', '1', '10');
+INSERT INTO `role_menu` VALUES ('11', '1', '11');
+INSERT INTO `role_menu` VALUES ('12', '1', '12');
+INSERT INTO `role_menu` VALUES ('13', '1', '13');
+INSERT INTO `role_menu` VALUES ('14', '1', '14');
+INSERT INTO `role_menu` VALUES ('15', '1', '15');
 
 -- ----------------------------
 -- Table structure for role_power
