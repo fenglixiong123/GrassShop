@@ -5,17 +5,7 @@ import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 
 
-public interface AdminService {
-
-    AdminVo get(Long id);
-
-    Long add(AdminVo adminVo);
-
-    int update(AdminVo adminVo);
-
-    int delete(Long id);
-
-    PageResult<AdminVo> list(PageQuery<AdminVo> pageQuery);
+public interface AdminService extends BaseService<AdminVo,Long>{
 
     AdminVo getAdminByUsernameAndPassword(String username,String password);
 

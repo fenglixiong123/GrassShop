@@ -4,6 +4,7 @@ import com.grass.api.service.admin.fallback.AdminServiceFallbackFactory;
 import com.grass.api.vo.admin.AdminVo;
 import com.grass.api.vo.admin.MenuVo;
 import com.grass.api.vo.admin.PowerVo;
+import com.grass.api.vo.admin.RoleVo;
 import com.grass.common.constants.AppConstant;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
@@ -20,6 +21,8 @@ import java.util.List;
  **/
 @FeignClient(value = AppConstant.GRASS_ADMIN,fallbackFactory = AdminServiceFallbackFactory.class)
 public interface IAdminService {
+
+    //用户相关API------------------------------------------------------------------------------------------
 
     //根据adminId获取用户详情
     @GetMapping("/admin/{id}")
@@ -45,7 +48,26 @@ public interface IAdminService {
     @PostMapping("/admin/getAdminByUsernameAndPassword")
     AdminVo getAdminByUsernameAndPassword(@RequestParam("username") String username, @RequestParam("password") String password);
 
-    //---------------------------------------------------------------------------------------
+    //角色相关API-----------------------------------------------------------------------------------------
+
+    @GetMapping("/admin/role/{id}")
+    RoleVo getRole(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/role")
+    Integer addRole(@RequestBody RoleVo roleVo);
+
+    @PutMapping("/admin/role")
+    int updateRole(@RequestBody RoleVo roleVo);
+
+    @DeleteMapping("/admin/role/{id}")
+    int deleteRole(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/role/list")
+    PageResult<RoleVo> listPageRole(@RequestBody(required = false) PageQuery<RoleVo> pageQuery);
+
+    //菜单相关API---------------------------------------------------------------------------------------
+
+    //权限相关API---------------------------------------------------------------------------------------
 
     //通过adminId获取菜单集合
     @GetMapping("/admin/menu/findMenuListByAdminId")

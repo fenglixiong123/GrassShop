@@ -4,7 +4,7 @@ import com.grass.api.vo.admin.RoleVo;
 
 import java.util.List;
 
-public interface RoleService {
+public interface RoleService extends BaseService<RoleVo,Integer>{
 
     List<RoleVo> findList();
 
