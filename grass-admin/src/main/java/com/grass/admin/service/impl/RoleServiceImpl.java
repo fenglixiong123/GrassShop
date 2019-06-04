@@ -78,12 +78,17 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public PageResult<RoleVo> list(PageQuery<RoleVo> pageQuery) {
         Page<Role> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        List<Role> roleList = queryList(pageQuery);
         PageInfo<Role> pageInfo =new PageInfo<>(page);
-        return new PageResult<>(pageInfo, listAll(pageQuery));
+        return new PageResult<>(pageInfo, CopyUtil.copyRoleEntity(roleList));
     }
 
     @Override
     public List<RoleVo> listAll(PageQuery<RoleVo> pageQuery) {
+        return CopyUtil.copyRoleEntity(queryList(pageQuery));
+    }
+
+    private List<Role> queryList(PageQuery<RoleVo> pageQuery){
         RoleExample example = new RoleExample();
         RoleVo queryVo = pageQuery.getEntity();
         if(queryVo!=null){
@@ -95,7 +100,7 @@ public class RoleServiceImpl implements RoleService {
                 criteria.andTitleLike("%"+queryVo.getTitle()+"%");
             }
         }
-        List<Role> roleList = roleDao.selectByExample(example);
-        return CopyUtil.copyRoleEntity(roleList);
+        return roleDao.selectByExample(example);
     }
+
 }

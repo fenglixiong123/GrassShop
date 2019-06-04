@@ -119,12 +119,18 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public PageResult<MenuVo> list(PageQuery<MenuVo> pageQuery) {
         Page<Menu> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        List<Menu> menuList = queryList(pageQuery);
         PageInfo<Menu> pageInfo =new PageInfo<>(page);
-        return new PageResult<>(pageInfo, listAll(pageQuery));
+        return new PageResult<>(pageInfo, CopyUtil.copyMenuEntity(menuList));
     }
 
     @Override
     public List<MenuVo> listAll(PageQuery<MenuVo> pageQuery) {
+
+        return CopyUtil.copyMenuEntity(queryList(pageQuery));
+    }
+
+    private List<Menu> queryList(PageQuery<MenuVo> pageQuery){
         MenuExample example = new MenuExample();
         MenuVo queryVo = pageQuery.getEntity();
         if(queryVo!=null){
@@ -136,7 +142,7 @@ public class MenuServiceImpl implements MenuService {
                 criteria.andTitleLike("%"+queryVo.getTitle()+"%");
             }
         }
-        List<Menu> menuList = menuDao.selectByExample(example);
-        return CopyUtil.copyMenuEntity(menuList);
+        return menuDao.selectByExample(example);
     }
+
 }
