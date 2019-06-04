@@ -9,9 +9,7 @@ import java.util.List;
  * @Create 2019/5/29 22:46
  * @Description
  **/
-public interface MenuService {
-
-    List<MenuVo> findList();
+public interface MenuService extends BaseService<MenuVo,Integer>{
 
     List<MenuVo> findListByAdminId(Long adminId);
 

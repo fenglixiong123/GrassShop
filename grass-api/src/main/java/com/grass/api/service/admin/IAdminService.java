@@ -67,7 +67,20 @@ public interface IAdminService {
 
     //菜单相关API---------------------------------------------------------------------------------------
 
-    //权限相关API---------------------------------------------------------------------------------------
+    @GetMapping("/admin/menu/{id}")
+    MenuVo getMenu(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/menu")
+    Integer addMenu(@RequestBody MenuVo menuVo);
+
+    @PutMapping("/admin/menu")
+    int updateMenu(@RequestBody MenuVo menuVo);
+
+    @DeleteMapping("/admin/menu/{id}")
+    int deleteMenu(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/menu/list")
+    PageResult<MenuVo> listPageMenu(@RequestBody(required = false) PageQuery<MenuVo> pageQuery);
 
     //通过adminId获取菜单集合
     @GetMapping("/admin/menu/findMenuListByAdminId")
@@ -76,6 +89,23 @@ public interface IAdminService {
     //通过adminId获取菜单树
     @GetMapping("/admin/menu/findMenuTreeByAdminId")
     List<MenuVo> findMenuTreeByAdminId(@RequestParam("id") Long id);
+
+    //权限相关API---------------------------------------------------------------------------------------
+
+    @GetMapping("/admin/power/{id}")
+    PowerVo getPower(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/power")
+    Integer addPower(@RequestBody PowerVo powerVo);
+
+    @PutMapping("/admin/power")
+    int updatePower(@RequestBody PowerVo powerVo);
+
+    @DeleteMapping("/admin/power/{id}")
+    int deletePower(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/power/list")
+    PageResult<PowerVo> listPagePower(@RequestBody(required = false) PageQuery<PowerVo> pageQuery);
 
     //通过adminId获取权限集合
     @GetMapping("/admin/power/findPowerListByAdminId")

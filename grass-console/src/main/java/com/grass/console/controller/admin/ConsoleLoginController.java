@@ -32,6 +32,7 @@ public class ConsoleLoginController {
     private ConsoleAdminService consoleAdminService;
 
     @PostMapping("/login")
+    @ApiOperation("用户登录")
     public ResultResponse loginByUsername(HttpServletRequest request, @RequestBody LoginFormVo loginFormVo){
         log.info("login---->loginForm:{}", JsonUtils.toJsonMsg(loginFormVo));
         String token = consoleAdminService.loginByUsername(request,loginFormVo.getUsername(),loginFormVo.getPassword());
@@ -44,6 +45,7 @@ public class ConsoleLoginController {
     }
 
     @GetMapping("/userInfo")
+    @ApiOperation("获取用户信息")
     public ResultResponse getUserInfo(HttpServletRequest request,@RequestParam String token){
         log.info("userInfo------->token:{}",token);
         AdminVo userInfo = consoleAdminService.findUserInfoByToken(request, token);
@@ -55,6 +57,7 @@ public class ConsoleLoginController {
     }
 
     @PostMapping("/logout")
+    @ApiOperation("用户退出")
     public ResultResponse logOut(HttpServletRequest request){
         log.info("logOut------------>");
         consoleAdminService.logOut(request);

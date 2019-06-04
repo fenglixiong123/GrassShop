@@ -1,5 +1,8 @@
 package com.grass.admin.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.grass.admin.dao.PowerDao;
 import com.grass.admin.model.Power;
 import com.grass.admin.model.PowerExample;
@@ -8,8 +11,13 @@ import com.grass.admin.service.PowerService;
 import com.grass.admin.service.RolePowerService;
 import com.grass.admin.utils.CopyUtil;
 import com.grass.api.vo.admin.PowerVo;
+import com.grass.common.page.PageQuery;
+import com.grass.common.page.PageResult;
 import com.grass.common.utils.CommonUtils;
+import com.grass.web.exception.element.ParamException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,5 +98,55 @@ public class PowerServiceImpl implements PowerService {
     }
 
 
+    @Override
+    public PowerVo get(Integer id) {
+        return CopyUtil.copyPowerEntity(powerDao.selectByPrimaryKey(id));
+    }
 
+    @Override
+    public Integer add(PowerVo powerVo) {
+        Power power = new Power();
+        BeanUtils.copyProperties(powerVo,power);
+        powerDao.insertSelective(power);
+        return power.getId();
+    }
+
+    @Override
+    public int update(PowerVo powerVo) {
+        if(powerVo.getId()==null){
+            throw new ParamException("更新ID为空！");
+        }
+        Power power = new Power();
+        BeanUtils.copyProperties(powerVo,power);
+        return powerDao.updateByPrimaryKeySelective(power);
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return powerDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public PageResult<PowerVo> list(PageQuery<PowerVo> pageQuery) {
+        Page<Power> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        PageInfo<Power> pageInfo =new PageInfo<>(page);
+        return new PageResult<>(pageInfo, listAll(pageQuery));
+    }
+
+    @Override
+    public List<PowerVo> listAll(PageQuery<PowerVo> pageQuery) {
+        PowerExample example = new PowerExample();
+        PowerVo queryVo = pageQuery.getEntity();
+        if(queryVo!=null){
+            PowerExample.Criteria criteria = example.createCriteria();
+            if(queryVo.getId()!=null){
+                criteria.andIdEqualTo(queryVo.getId());
+            }
+            if(StringUtils.isNotBlank(queryVo.getTitle())){
+                criteria.andTitleLike("%"+queryVo.getTitle()+"%");
+            }
+        }
+        List<Power> powerList = powerDao.selectByExample(example);
+        return CopyUtil.copyPowerEntity(powerList);
+    }
 }

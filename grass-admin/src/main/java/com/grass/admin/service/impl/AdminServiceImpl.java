@@ -67,6 +67,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public PageResult<AdminVo> list(PageQuery<AdminVo> pageQuery) {
         Page<Admin> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        PageInfo<Admin> pageInfo =new PageInfo<>(page);
+        return new PageResult<>(pageInfo, listAll(pageQuery));
+    }
+
+    @Override
+    public List<AdminVo> listAll(PageQuery<AdminVo> pageQuery) {
         AdminExample example = new AdminExample();
         AdminVo queryVo = pageQuery.getEntity();
         if(queryVo!=null){
@@ -82,9 +88,7 @@ public class AdminServiceImpl implements AdminService {
             }
         }
         List<Admin> adminList =adminDao.selectByExample(example);
-        PageInfo<Admin> pageInfo =new PageInfo<>(page);
-
-        return new PageResult<>(pageInfo, CopyUtil.copyAdminEntity(adminList));
+        return CopyUtil.copyAdminEntity(adminList);
     }
 
     @Override

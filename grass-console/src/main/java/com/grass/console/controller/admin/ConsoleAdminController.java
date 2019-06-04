@@ -36,7 +36,7 @@ public class ConsoleAdminController {
     @ApiOperation(value = "根据ID查询用户")
     public ResultResponse get(@PathVariable("id") Long id){
         log.info("get---->id:{}",id);
-        return ResultResponse.ok(adminService.get(id));
+        return ResultResponse.ok(adminService.getAdmin(id));
     }
 
 
@@ -45,7 +45,7 @@ public class ConsoleAdminController {
     @ApiOperation(value = "新增用户")
     public ResultResponse add(@RequestBody AdminVo adminVo){
         log.info("add---->adminVo:{}", JsonUtils.toJsonMsg(adminVo));
-        return ResultResponse.ok(adminService.add(adminVo));
+        return ResultResponse.ok(adminService.addAdmin(adminVo));
     }
 
 
@@ -53,7 +53,7 @@ public class ConsoleAdminController {
     @ApiOperation(value = "更新用户")
     public ResultResponse update(@RequestBody AdminVo adminVo){
         log.info("update---->adminVo:{}",JsonUtils.toJsonMsg(adminVo));
-        return ResultResponse.ok(adminService.update(adminVo));
+        return ResultResponse.ok(adminService.updateAdmin(adminVo));
     }
 
 
@@ -61,7 +61,7 @@ public class ConsoleAdminController {
     @ApiOperation(value = "删除用户")
     public ResultResponse delete(@PathVariable("id") Long id){
         log.info("delete---->id:{}",id);
-        return ResultResponse.ok(adminService.delete(id));
+        return ResultResponse.ok(adminService.deleteAdmin(id));
     }
 
 
@@ -72,7 +72,7 @@ public class ConsoleAdminController {
         if(pageQuery==null){
             pageQuery = new PageQuery<>();
         }
-        return ResultResponse.ok(adminService.list(pageQuery));
+        return ResultResponse.ok(adminService.listPageAdmin(pageQuery));
     }
 
 }

@@ -71,11 +71,51 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
                 return null;
             }
 
+            public MenuVo getMenu(Integer id) {
+                return null;
+            }
+
+            public Integer addMenu(MenuVo menuVo) {
+                return null;
+            }
+
+            public int updateMenu(MenuVo menuVo) {
+                return 0;
+            }
+
+            public int deleteMenu(Integer id) {
+                return 0;
+            }
+
+            public PageResult<MenuVo> listPageMenu(PageQuery<MenuVo> pageQuery) {
+                return null;
+            }
+
             public List<MenuVo> findMenuListByAdminId(Long id) {
                 return null;
             }
 
             public List<MenuVo> findMenuTreeByAdminId(Long id) {
+                return null;
+            }
+
+            public PowerVo getPower(Integer id) {
+                return null;
+            }
+
+            public Integer addPower(PowerVo powerVo) {
+                return null;
+            }
+
+            public int updatePower(PowerVo powerVo) {
+                return 0;
+            }
+
+            public int deletePower(Integer id) {
+                return 0;
+            }
+
+            public PageResult<PowerVo> listPagePower(PageQuery<PowerVo> pageQuery) {
                 return null;
             }
 

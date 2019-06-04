@@ -1,5 +1,8 @@
 package com.grass.admin.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.grass.admin.dao.MenuDao;
 import com.grass.admin.model.Menu;
 import com.grass.admin.model.MenuExample;
@@ -8,8 +11,13 @@ import com.grass.admin.service.MenuService;
 import com.grass.admin.service.RoleMenuService;
 import com.grass.admin.utils.CopyUtil;
 import com.grass.api.vo.admin.MenuVo;
+import com.grass.common.page.PageQuery;
+import com.grass.common.page.PageResult;
 import com.grass.common.utils.CommonUtils;
+import com.grass.web.exception.element.ParamException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,15 +38,6 @@ public class MenuServiceImpl implements MenuService {
     private RoleMenuService roleMenuService;
     @Autowired
     private MenuDao menuDao;
-
-    /**
-     * 获取所有菜单列表
-     * @return
-     */
-    public List<MenuVo> findList(){
-        List<Menu> menus = menuDao.selectByExample(null);
-        return CopyUtil.copyMenuEntity(menus);
-    }
 
     /**
      * 通过adminId获取菜单列表
@@ -88,5 +87,56 @@ public class MenuServiceImpl implements MenuService {
         List<Menu> menus = menuDao.selectByExample(example);
         return CopyUtil.copyMenuEntity(menus);
     }
-    
+
+    @Override
+    public MenuVo get(Integer id) {
+        return CopyUtil.copyMenuEntity(menuDao.selectByPrimaryKey(id));
+    }
+
+    @Override
+    public Integer add(MenuVo menuVo) {
+        Menu menu = new Menu();
+        BeanUtils.copyProperties(menuVo,menu);
+        menuDao.insertSelective(menu);
+        return menu.getId();
+    }
+
+    @Override
+    public int update(MenuVo menuVo) {
+        if(menuVo.getId()==null){
+            throw new ParamException("更新ID为空！");
+        }
+        Menu menu = new Menu();
+        BeanUtils.copyProperties(menuVo,menu);
+        return menuDao.updateByPrimaryKeySelective(menu);
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return menuDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public PageResult<MenuVo> list(PageQuery<MenuVo> pageQuery) {
+        Page<Menu> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        PageInfo<Menu> pageInfo =new PageInfo<>(page);
+        return new PageResult<>(pageInfo, listAll(pageQuery));
+    }
+
+    @Override
+    public List<MenuVo> listAll(PageQuery<MenuVo> pageQuery) {
+        MenuExample example = new MenuExample();
+        MenuVo queryVo = pageQuery.getEntity();
+        if(queryVo!=null){
+            MenuExample.Criteria criteria = example.createCriteria();
+            if(queryVo.getId()!=null){
+                criteria.andIdEqualTo(queryVo.getId());
+            }
+            if(StringUtils.isNotBlank(queryVo.getTitle())){
+                criteria.andTitleLike("%"+queryVo.getTitle()+"%");
+            }
+        }
+        List<Menu> menuList = menuDao.selectByExample(example);
+        return CopyUtil.copyMenuEntity(menuList);
+    }
 }

@@ -36,14 +36,6 @@ public class RoleServiceImpl implements RoleService {
     private RoleDao roleDao;
 
     /**
-     * 获取所有的角色列表
-     * @return
-     */
-    public List<RoleVo> findList(){
-        return CopyUtil.copyRoleEntity(roleDao.selectByExample(null));
-    }
-
-    /**
      * 根据adminId获取角色列表
      * @param adminId
      * @return
@@ -86,6 +78,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public PageResult<RoleVo> list(PageQuery<RoleVo> pageQuery) {
         Page<Role> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        PageInfo<Role> pageInfo =new PageInfo<>(page);
+        return new PageResult<>(pageInfo, listAll(pageQuery));
+    }
+
+    @Override
+    public List<RoleVo> listAll(PageQuery<RoleVo> pageQuery) {
         RoleExample example = new RoleExample();
         RoleVo queryVo = pageQuery.getEntity();
         if(queryVo!=null){
@@ -98,7 +96,6 @@ public class RoleServiceImpl implements RoleService {
             }
         }
         List<Role> roleList = roleDao.selectByExample(example);
-        PageInfo<Role> pageInfo =new PageInfo<>(page);
-        return new PageResult<>(pageInfo, CopyUtil.copyRoleEntity(roleList));
+        return CopyUtil.copyRoleEntity(roleList);
     }
 }

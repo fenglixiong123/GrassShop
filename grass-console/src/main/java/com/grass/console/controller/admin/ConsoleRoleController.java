@@ -27,31 +27,36 @@ public class ConsoleRoleController {
     private IAdminService adminService;
 
     @GetMapping("/{id}")
-    public ResultResponse<RoleVo> get(@PathVariable("id") Integer id){
+    @ApiOperation(value = "根据ID查询角色")
+    public ResultResponse<RoleVo> getRole(@PathVariable("id") Integer id){
         log.info("getRole------>");
         return ResultResponse.ok(adminService.getRole(id));
     }
 
     @PostMapping
-    public ResultResponse<Integer> add(@RequestBody RoleVo roleVo){
+    @ApiOperation(value = "新增角色")
+    public ResultResponse<Integer> addRole(@RequestBody RoleVo roleVo){
         log.info("addRole------>");
         return ResultResponse.ok(adminService.addRole(roleVo));
     }
 
     @PutMapping
-    public ResultResponse<Integer> update(@RequestBody RoleVo roleVo){
+    @ApiOperation(value = "修改角色")
+    public ResultResponse<Integer> updateRole(@RequestBody RoleVo roleVo){
         log.info("updateRole------>");
         return ResultResponse.ok(adminService.updateRole(roleVo));
     }
 
     @DeleteMapping("/{id}")
-    public ResultResponse<Integer> delete(@PathVariable("id") Integer id){
+    @ApiOperation(value = "删除角色")
+    public ResultResponse<Integer> deleteRole(@PathVariable("id") Integer id){
         log.info("deleteRole------>");
         return ResultResponse.ok(adminService.deleteRole(id));
     }
 
     @PostMapping("/list")
-    public ResultResponse<PageResult<RoleVo>> listPage(@RequestBody(required = false) PageQuery<RoleVo> pageQuery){
+    @ApiOperation(value = "分页查询角色")
+    public ResultResponse<PageResult<RoleVo>> listPageRole(@RequestBody(required = false) PageQuery<RoleVo> pageQuery){
         log.info("listPageRole------>");
         return ResultResponse.ok(adminService.listPageRole(pageQuery));
     }

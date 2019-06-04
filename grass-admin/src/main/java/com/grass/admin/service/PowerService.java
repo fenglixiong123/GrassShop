@@ -4,7 +4,7 @@ import com.grass.api.vo.admin.PowerVo;
 
 import java.util.List;
 
-public interface PowerService {
+public interface PowerService extends BaseService<PowerVo,Integer>{
 
     List<PowerVo> findList();
 
