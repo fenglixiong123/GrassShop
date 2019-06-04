@@ -7,6 +7,9 @@ import com.grass.common.utils.json.JsonUtils;
 import com.grass.console.service.ConsoleAdminService;
 import com.grass.console.vo.LoginFormVo;
 import com.grass.web.exception.element.BizException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestController
 @RequestMapping("/console/admin")
+@Api("控制台登录相关")
 public class ConsoleLoginController {
 
     @Autowired

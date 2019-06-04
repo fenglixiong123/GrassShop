@@ -39,7 +39,7 @@ public class RoleController {
     @Valid
     @PostMapping
     public Integer add(@RequestBody RoleVo roleVo){
-        log.info("add---->roleVo:", JsonUtils.toJsonMsg(roleVo));
+        log.info("add---->roleVo:{}", JsonUtils.toJsonMsg(roleVo));
         return roleService.add(roleVo);
     }
 

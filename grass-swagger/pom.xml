@@ -8,34 +8,32 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../grass-parent/pom.xml</relativePath>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>grass-console</artifactId>
+    <artifactId>grass-swagger</artifactId>
 
     <dependencies>
+        <!--swagger ui 的使用-->
         <dependency>
-            <groupId>com.grass</groupId>
-            <artifactId>grass-web</artifactId>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.grass</groupId>
-            <artifactId>grass-swagger</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
-
 
 </project>

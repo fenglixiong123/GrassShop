@@ -40,7 +40,7 @@ public class AdminController {
     @Valid
     @PostMapping
     public Long add(@RequestBody AdminVo adminVo){
-        log.info("add---->adminVo:", JsonUtils.toJsonMsg(adminVo));
+        log.info("add---->adminVo:{}", JsonUtils.toJsonMsg(adminVo));
         return adminService.add(adminVo);
     }
 

@@ -2,6 +2,9 @@ package com.grass.console.controller.admin;
 
 import com.grass.api.service.admin.IAdminService;
 import com.grass.common.result.ResultResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/console/admin")
+@Api(value = "控制台权限相关")
 public class ConsolePowerController {
 
     @Autowired

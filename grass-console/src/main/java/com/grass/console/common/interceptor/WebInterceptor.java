@@ -24,7 +24,7 @@ public class WebInterceptor implements HandlerInterceptor {
 
     private static String[] writeUrl = {
             "/console/admin/login",
-            "/console/admin/getToken"};
+    };
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

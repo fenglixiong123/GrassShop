@@ -4,6 +4,7 @@ import com.grass.api.service.admin.IAdminService;
 import com.grass.api.vo.admin.AdminVo;
 import com.grass.api.vo.admin.MenuVo;
 import com.grass.api.vo.admin.PowerVo;
+import com.grass.api.vo.admin.RoleVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import feign.hystrix.FallbackFactory;
@@ -26,28 +27,48 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
     public IAdminService create(Throwable throwable) {
         return new IAdminService() {
 
-            public AdminVo get(Long id) {
+            public AdminVo getAdmin(Long id) {
                 return new AdminVo(-99L,"default");
             }
 
-            public Long add(AdminVo adminVo) {
+            public Long addAdmin(AdminVo adminVo) {
                 return -99L;
             }
 
-            public int update(AdminVo adminVo) {
+            public int updateAdmin(AdminVo adminVo) {
                 return -99;
             }
 
-            public int delete(Long id) {
+            public int deleteAdmin(Long id) {
                 return -99;
             }
 
-            public PageResult<AdminVo> list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery) {
+            public PageResult<AdminVo> listPageAdmin(@RequestBody(required = false) PageQuery<AdminVo> pageQuery) {
                 return new PageResult<AdminVo>();
             }
 
             public AdminVo getAdminByUsernameAndPassword(String username, String password) {
                 return new AdminVo(-99L,"default");
+            }
+
+            public RoleVo getRole(Integer id) {
+                return null;
+            }
+
+            public Integer addRole(RoleVo roleVo) {
+                return null;
+            }
+
+            public int updateRole(RoleVo roleVo) {
+                return 0;
+            }
+
+            public int deleteRole(Integer id) {
+                return 0;
+            }
+
+            public PageResult<RoleVo> listPageRole(PageQuery<RoleVo> pageQuery) {
+                return null;
             }
 
             public List<MenuVo> findMenuListByAdminId(Long id) {

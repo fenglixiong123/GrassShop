@@ -6,6 +6,9 @@ import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import com.grass.common.result.ResultResponse;
 import com.grass.common.utils.json.JsonUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,53 +26,47 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/console/admin")
+@Api(value = "控制台管理员相关")
 public class ConsoleAdminController {
 
     @Autowired
     private IAdminService adminService;
 
-    /**
-     * 根据ID查询用户
-     */
     @GetMapping("/{id}")
+    @ApiOperation(value = "根据ID查询用户")
     public ResultResponse get(@PathVariable("id") Long id){
         log.info("get---->id:{}",id);
         return ResultResponse.ok(adminService.get(id));
     }
 
-    /**
-     * 新增用户
-     */
+
     @Valid
     @PostMapping
+    @ApiOperation(value = "新增用户")
     public ResultResponse add(@RequestBody AdminVo adminVo){
-        log.info("add---->adminVo:", JsonUtils.toJsonMsg(adminVo));
+        log.info("add---->adminVo:{}", JsonUtils.toJsonMsg(adminVo));
         return ResultResponse.ok(adminService.add(adminVo));
     }
 
-    /**
-     * 更新用户
-     */
+
     @PutMapping
+    @ApiOperation(value = "更新用户")
     public ResultResponse update(@RequestBody AdminVo adminVo){
         log.info("update---->adminVo:{}",JsonUtils.toJsonMsg(adminVo));
         return ResultResponse.ok(adminService.update(adminVo));
     }
 
-    /**
-     * 删除用户
-     */
+
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除用户")
     public ResultResponse delete(@PathVariable("id") Long id){
         log.info("delete---->id:{}",id);
         return ResultResponse.ok(adminService.delete(id));
     }
 
-    /**
-     * 分页查询用户
-     * @return
-     */
+
     @PostMapping("/list")
+    @ApiOperation(value = "分页查询用户")
     public ResultResponse list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery){
         log.info("list---->pageQuery:{}",JsonUtils.toJsonMsg(pageQuery));
         if(pageQuery==null){

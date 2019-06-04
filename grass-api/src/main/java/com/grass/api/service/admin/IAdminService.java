@@ -26,23 +26,23 @@ public interface IAdminService {
 
     //根据adminId获取用户详情
     @GetMapping("/admin/{id}")
-    AdminVo get(@PathVariable("id") Long id);
+    AdminVo getAdmin(@PathVariable("id") Long id);
 
     //添加用户
     @PostMapping("/admin")
-    Long add(@RequestBody AdminVo adminVo);
+    Long addAdmin(@RequestBody AdminVo adminVo);
 
     //修改用户
     @PutMapping("/admin")
-    int update(@RequestBody AdminVo adminVo);
+    int updateAdmin(@RequestBody AdminVo adminVo);
 
     //删除用户
     @DeleteMapping("/admin/{id}")
-    int delete(@PathVariable("id") Long id);
+    int deleteAdmin(@PathVariable("id") Long id);
 
     //用户列表带分页
     @PostMapping("/admin/list")
-    PageResult<AdminVo> list(@RequestBody(required = false) PageQuery<AdminVo> pageQuery);
+    PageResult<AdminVo> listPageAdmin(@RequestBody(required = false) PageQuery<AdminVo> pageQuery);
 
     //根据用户名密码查询用户
     @PostMapping("/admin/getAdminByUsernameAndPassword")
