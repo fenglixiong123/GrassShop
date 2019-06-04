@@ -129,12 +129,18 @@ public class PowerServiceImpl implements PowerService {
     @Override
     public PageResult<PowerVo> list(PageQuery<PowerVo> pageQuery) {
         Page<Power> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        List<Power> powerList = queryList(pageQuery);
         PageInfo<Power> pageInfo =new PageInfo<>(page);
-        return new PageResult<>(pageInfo, listAll(pageQuery));
+        return new PageResult<>(pageInfo, CopyUtil.copyPowerEntity(powerList));
     }
 
     @Override
     public List<PowerVo> listAll(PageQuery<PowerVo> pageQuery) {
+
+        return CopyUtil.copyPowerEntity(queryList(pageQuery));
+    }
+
+    private List<Power> queryList(PageQuery<PowerVo> pageQuery){
         PowerExample example = new PowerExample();
         PowerVo queryVo = pageQuery.getEntity();
         if(queryVo!=null){
@@ -146,7 +152,7 @@ public class PowerServiceImpl implements PowerService {
                 criteria.andTitleLike("%"+queryVo.getTitle()+"%");
             }
         }
-        List<Power> powerList = powerDao.selectByExample(example);
-        return CopyUtil.copyPowerEntity(powerList);
+        return powerDao.selectByExample(example);
     }
+
 }

@@ -126,7 +126,6 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuVo> listAll(PageQuery<MenuVo> pageQuery) {
-
         return CopyUtil.copyMenuEntity(queryList(pageQuery));
     }
 

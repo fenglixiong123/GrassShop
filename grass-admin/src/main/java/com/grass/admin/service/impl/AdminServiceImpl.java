@@ -67,12 +67,30 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public PageResult<AdminVo> list(PageQuery<AdminVo> pageQuery) {
         Page<Admin> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+        List<Admin> adminList = queryList(pageQuery);
         PageInfo<Admin> pageInfo =new PageInfo<>(page);
-        return new PageResult<>(pageInfo, listAll(pageQuery));
+        return new PageResult<>(pageInfo, CopyUtil.copyAdminEntity(adminList));
     }
 
     @Override
     public List<AdminVo> listAll(PageQuery<AdminVo> pageQuery) {
+
+        return CopyUtil.copyAdminEntity(queryList(pageQuery));
+    }
+
+    @Override
+    public AdminVo getAdminByUsernameAndPassword(String username, String password) {
+        AdminExample example = new AdminExample();
+        example.createCriteria().andUsernameEqualTo(username)
+                .andPasswordEqualTo(password);
+        List<Admin> adminList = adminDao.selectByExample(example);
+        if(CommonUtils.isNotEmpty(adminList)){
+            return CopyUtil.copyAdminEntity(adminList.get(0));
+        }
+        return null;
+    }
+
+    private List<Admin> queryList(PageQuery<AdminVo> pageQuery){
         AdminExample example = new AdminExample();
         AdminVo queryVo = pageQuery.getEntity();
         if(queryVo!=null){
@@ -87,19 +105,7 @@ public class AdminServiceImpl implements AdminService {
                 criteria.andSexEqualTo(queryVo.getSex());
             }
         }
-        List<Admin> adminList =adminDao.selectByExample(example);
-        return CopyUtil.copyAdminEntity(adminList);
+        return adminDao.selectByExample(example);
     }
 
-    @Override
-    public AdminVo getAdminByUsernameAndPassword(String username, String password) {
-        AdminExample example = new AdminExample();
-        example.createCriteria().andUsernameEqualTo(username)
-                .andPasswordEqualTo(password);
-        List<Admin> adminList = adminDao.selectByExample(example);
-        if(CommonUtils.isNotEmpty(adminList)){
-            return CopyUtil.copyAdminEntity(adminList.get(0));
-        }
-        return null;
-    }
 }
