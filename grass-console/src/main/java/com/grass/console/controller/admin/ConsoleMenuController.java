@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @Author Fenglixiong
  * @Create 2019/5/30 0:21
@@ -35,7 +37,7 @@ public class ConsoleMenuController {
 
     @PostMapping
     @ApiOperation(value = "新增菜单")
-    public ResultResponse<Integer> addMenu(@RequestBody MenuVo menuVo){
+    public ResultResponse<Integer> addMenu(@Valid @RequestBody MenuVo menuVo){
         log.info("addMenu------>");
         return ResultResponse.ok(adminService.addMenu(menuVo));
     }

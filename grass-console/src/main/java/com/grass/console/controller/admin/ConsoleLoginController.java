@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * @Author Fenglixiong
@@ -33,7 +34,7 @@ public class ConsoleLoginController {
 
     @PostMapping("/login")
     @ApiOperation("用户登录")
-    public ResultResponse loginByUsername(HttpServletRequest request, @RequestBody LoginFormVo loginFormVo){
+    public ResultResponse loginByUsername(HttpServletRequest request, @Valid @RequestBody LoginFormVo loginFormVo){
         log.info("login---->loginForm:{}", JsonUtils.toJsonMsg(loginFormVo));
         String token = consoleAdminService.loginByUsername(request,loginFormVo.getUsername(),loginFormVo.getPassword());
         if(StringUtils.isNotBlank(token)){

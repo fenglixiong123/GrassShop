@@ -3,6 +3,8 @@ package com.grass.api.vo.admin;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -19,16 +21,19 @@ public class MenuVo {
     /**
      * 菜单名称
      */
+    @NotBlank(message = "title is null")
     private String title;
 
     /**
      * 父级菜单
      */
+    @NotNull(message = "parentId is null")
     private Integer parentId;
 
     /**
      * 菜单路径
      */
+    @NotBlank(message = "path is null")
     private String path;
 
     /**

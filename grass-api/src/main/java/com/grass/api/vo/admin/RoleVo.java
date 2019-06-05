@@ -2,6 +2,9 @@ package com.grass.api.vo.admin;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * @Author Fenglixiong
  * @Create 2019/5/28 0:18
@@ -15,6 +18,7 @@ public class RoleVo {
     /**
      * 角色名称
      */
+    @NotBlank(message = "title is null")
     private String title;
 
     /**

@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @Author Fenglixiong
  * @Create 2019/6/4 0:41
@@ -35,7 +37,7 @@ public class ConsoleRoleController {
 
     @PostMapping
     @ApiOperation(value = "新增角色")
-    public ResultResponse<Integer> addRole(@RequestBody RoleVo roleVo){
+    public ResultResponse<Integer> addRole(@Valid @RequestBody RoleVo roleVo){
         log.info("addRole------>");
         return ResultResponse.ok(adminService.addRole(roleVo));
     }

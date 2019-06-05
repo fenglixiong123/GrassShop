@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @Author Fenglixiong
  * @Create 2019/5/28 23:56
@@ -35,7 +37,7 @@ public class ConsolePowerController {
 
     @PostMapping
     @ApiOperation(value = "新增权限")
-    public ResultResponse<Integer> addPower(@RequestBody PowerVo powerVo){
+    public ResultResponse<Integer> addPower(@Valid @RequestBody PowerVo powerVo){
         log.info("addPower------>");
         return ResultResponse.ok(adminService.addPower(powerVo));
     }

@@ -43,7 +43,7 @@ public class ConsoleAdminController {
     @Valid
     @PostMapping
     @ApiOperation(value = "新增用户")
-    public ResultResponse add(@RequestBody AdminVo adminVo){
+    public ResultResponse add(@Valid @RequestBody AdminVo adminVo){
         log.info("add---->adminVo:{}", JsonUtils.toJsonMsg(adminVo));
         return ResultResponse.ok(adminService.addAdmin(adminVo));
     }
