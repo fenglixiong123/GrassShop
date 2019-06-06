@@ -1,11 +1,14 @@
 package com.grass.admin.model;
 
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * admin_role
  * @author 
  */
+@NoArgsConstructor
 public class AdminRole implements Serializable {
     private Long id;
 
@@ -20,6 +23,11 @@ public class AdminRole implements Serializable {
     private Integer roleId;
 
     private static final long serialVersionUID = 1L;
+
+    public AdminRole(Long adminId, Integer roleId) {
+        this.adminId = adminId;
+        this.roleId = roleId;
+    }
 
     public Long getId() {
         return id;

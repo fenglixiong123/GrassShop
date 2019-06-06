@@ -11,30 +11,33 @@ public interface RoleService extends BaseService<RoleVo,Integer> {
 
     /**
      * 根据AdminId查询角色列表
-     * @param adminId
-     * @return
      */
     List<RoleVo> findListByAdminId(Long adminId);
 
-    /**
-     * 批量删除角色
-     * @param ids
-     * @return
-     */
-    int deleteRoles(List<Integer> ids);
 
     /**
      * 根据角色ID获得拥有的菜单列表
-     * @param roleId
-     * @return
      */
     PossessMenu findPossessMenuByRoleId(Integer roleId);
 
     /**
      * 根据角色ID获得拥有的权限列表
-     * @param roleId
-     * @return
      */
     PossessPower findPossessPowerByRoleId(Integer roleId);
+
+    /**
+     * 分配菜单给指定角色
+     */
+    void assignMenuToRole(List<Integer> menuIds,Integer roleId);
+
+    /**
+     * 分配权限给指定角色
+     */
+    void assignPowerToRole(List<Integer> powerIds,Integer roleId);
+
+    /**
+     * 批量删除角色
+     */
+    int deleteRoles(List<Integer> ids);
 
 }

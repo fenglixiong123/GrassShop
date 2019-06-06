@@ -14,8 +14,15 @@ public interface AdminRoleService {
 
     int deleteByAdminId(Long id);
 
+    int deleteByAdminIds(List<Long> ids);
+
     int deleteByRoleId(Integer id);
 
     int deleteByRoleIds(List<Integer> ids);
+
+    /**
+     * 通过用户和角色共同删除直接的关系
+     */
+    int deleteByAdminAndRoles(Long adminId,List<Integer> roleIds);
 
 }

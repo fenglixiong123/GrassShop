@@ -110,5 +110,14 @@ public class RolePowerServiceImpl implements RolePowerService {
         return rolePowerDao.deleteByExample(example);
     }
 
+    @Override
+    public int deleteByRoleAndPowers(Integer roleId, List<Integer> powerIds) {
+        RolePowerExample example = new RolePowerExample();
+        example.createCriteria()
+                .andRoleIdEqualTo(roleId)
+                .andPowerIdIn(powerIds);
+        return rolePowerDao.deleteByExample(example);
+    }
+
 
 }

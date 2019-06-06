@@ -2,6 +2,7 @@ package com.grass.admin.controller;
 
 import com.grass.admin.service.core.AdminService;
 import com.grass.api.vo.admin.AdminVo;
+import com.grass.api.vo.admin.PossessRole;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import com.grass.common.utils.json.JsonUtils;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 /**
@@ -73,6 +75,29 @@ public class AdminController {
             pageQuery = new PageQuery<>();
         }
         return adminService.list(pageQuery);
+    }
+
+    /**
+     * 根据用户ID查询拥有的角色
+     * @param id
+     * @return
+     */
+    @GetMapping("/findPossessRoleByAdminId/{id}")
+    public PossessRole findPossessRoleByAdminId(@PathVariable Long id){
+        log.info("findPossessRoleByAdminId--->id:{}",id);
+        return adminService.findPossessRoleByAdminId(id);
+    }
+
+    /**
+     * 分配角色给用户
+     * @param roleIds
+     * @param adminId
+     */
+    @PostMapping("/assignRoleToAdmin")
+    public void assignRoleToAdmin(@RequestParam List<Integer> roleIds,
+                                  @RequestParam Long adminId){
+        log.info("assignRoleToAdmin--------->roleIds:{},adminId:{}",roleIds,adminId);
+        adminService.assignRoleToAdmin(roleIds,adminId);
     }
 
 }

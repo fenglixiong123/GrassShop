@@ -6,17 +6,22 @@ import com.github.pagehelper.PageInfo;
 import com.grass.admin.dao.RoleDao;
 import com.grass.admin.model.Role;
 import com.grass.admin.model.RoleExample;
+import com.grass.admin.model.RoleMenu;
+import com.grass.admin.model.RolePower;
 import com.grass.admin.service.core.MenuService;
 import com.grass.admin.service.core.PowerService;
 import com.grass.admin.service.relation.AdminRoleService;
 import com.grass.admin.service.relation.RoleMenuService;
 import com.grass.admin.service.relation.RolePowerService;
 import com.grass.admin.service.core.RoleService;
+import com.grass.admin.utils.AssignUtil;
 import com.grass.admin.utils.ConvertTreeUtil;
 import com.grass.admin.utils.CopyUtil;
+import com.grass.admin.vo.AddDeleteVo;
 import com.grass.api.vo.admin.*;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
+import com.grass.common.utils.CommonUtils;
 import com.grass.web.exception.element.ParamException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -113,26 +119,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public PossessMenu findPossessMenuByRoleId(Integer roleId) {
-        List<MenuVo> allMenus = menuService.listAll(null);
-        List<MenuVo> menuVos = null;
-        if(allMenus!=null) {
-            menuVos = ConvertTreeUtil.listToTreeMenu(menuService.findListByRoleId(roleId));
-        }
-        return new PossessMenu(allMenus,menuVos);
-    }
-
-    @Override
-    public PossessPower findPossessPowerByRoleId(Integer roleId) {
-        List<PowerVo> allPowers = powerService.listAll(null);
-        List<PowerVo> hasPowers = null;
-        if(allPowers!=null){
-            hasPowers = ConvertTreeUtil.listToTreePower(powerService.findListByRoleId(roleId));
-        }
-        return new PossessPower(allPowers,hasPowers);
-    }
-
-    @Override
     public PageResult<RoleVo> list(PageQuery<RoleVo> pageQuery) {
         Page<Role> page = PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
         List<Role> roleList = queryList(pageQuery);
@@ -158,6 +144,62 @@ public class RoleServiceImpl implements RoleService {
             }
         }
         return roleDao.selectByExample(example);
+    }
+
+    @Override
+    public PossessMenu findPossessMenuByRoleId(Integer roleId) {
+        List<MenuVo> allMenus = menuService.listAll(null);
+        List<MenuVo> menuVos = null;
+        if(allMenus!=null) {
+            menuVos = ConvertTreeUtil.listToTreeMenu(menuService.findListByRoleId(roleId));
+        }
+        return new PossessMenu(allMenus,menuVos);
+    }
+
+    @Override
+    public PossessPower findPossessPowerByRoleId(Integer roleId) {
+        List<PowerVo> allPowers = powerService.listAll(null);
+        List<PowerVo> hasPowers = null;
+        if(allPowers!=null){
+            hasPowers = ConvertTreeUtil.listToTreePower(powerService.findListByRoleId(roleId));
+        }
+        return new PossessPower(allPowers,hasPowers);
+    }
+
+    @Override
+    public void assignMenuToRole(List<Integer> menuIds, Integer roleId) {
+        //1.首先拿到已拥有的菜单
+        List<Integer> hasMenuIds = roleMenuService.findMenuIdsByRoleId(roleId);
+        //2.分离需要新增和需要删除的
+        AddDeleteVo resolve = AssignUtil.resolve(hasMenuIds, menuIds);
+        List<Integer> needAdd = resolve.getNeedAdd();
+        List<Integer> needDelete = resolve.getNeedDelete();
+        //3.删除已有的菜单关系
+        if(CommonUtils.isNotEmpty(needDelete)) {
+            roleMenuService.deleteByRoleAndMenus(roleId,needDelete);
+        }
+        //4.新增所需的菜单关系
+        if(CommonUtils.isNotEmpty(needAdd)) {
+            needAdd.forEach(menuId->roleMenuService.add(new RoleMenu(roleId,menuId)));
+        }
+    }
+
+    @Override
+    public void assignPowerToRole(List<Integer> powerIds, Integer roleId) {
+        //1.首先拿到已拥有的权限
+        List<Integer> hasPowerIds = rolePowerService.findPowerIdsByRoleId(roleId);
+        //2.分离需要新增和需要删除的
+        AddDeleteVo resolve = AssignUtil.resolve(hasPowerIds, powerIds);
+        List<Integer> needAdd = resolve.getNeedAdd();
+        List<Integer> needDelete = resolve.getNeedDelete();
+        //3.删除已有的权限关系
+        if(CommonUtils.isNotEmpty(needDelete)) {
+            rolePowerService.deleteByRoleAndPowers(roleId,needDelete);
+        }
+        //4.新增所需的权限关系
+        if(CommonUtils.isNotEmpty(needAdd)) {
+            needAdd.forEach(powerId->rolePowerService.add(new RolePower(roleId,powerId)));
+        }
     }
 
 }

@@ -69,6 +69,18 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     }
 
     /**
+     * 通过adminIDs删除角色用户信息
+     * @param ids
+     * @return
+     */
+    @Override
+    public int deleteByAdminIds(List<Long> ids) {
+        AdminRoleExample example = new AdminRoleExample();
+        example.createCriteria().andAdminIdIn(ids);
+        return adminRoleDao.deleteByExample(example);
+    }
+
+    /**
      * 根据roleId删除用户角色关系
      * @param id
      * @return
@@ -87,6 +99,20 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     public int deleteByRoleIds(List<Integer> ids){
         AdminRoleExample example = new AdminRoleExample();
         example.createCriteria().andRoleIdIn(ids);
+        return adminRoleDao.deleteByExample(example);
+    }
+
+    /**
+     * 通过用户和角色共同删除直接的关系
+     * @param adminId
+     * @param roleIds
+     * @return
+     */
+    @Override
+    public int deleteByAdminAndRoles(Long adminId, List<Integer> roleIds) {
+        AdminRoleExample example = new AdminRoleExample();
+        example.createCriteria().andAdminIdEqualTo(adminId)
+                .andRoleIdIn(roleIds);
         return adminRoleDao.deleteByExample(example);
     }
 

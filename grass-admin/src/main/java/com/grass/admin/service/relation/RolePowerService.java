@@ -29,4 +29,5 @@ public interface RolePowerService {
 
     int deleteByPowerIds(List<Integer> ids);
 
+    int deleteByRoleAndPowers(Integer roleId,List<Integer> powerIds);
 }

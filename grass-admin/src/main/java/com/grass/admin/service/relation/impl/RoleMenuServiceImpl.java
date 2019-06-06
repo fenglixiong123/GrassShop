@@ -104,5 +104,14 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         example.createCriteria().andMenuIdIn(ids);
         return roleMenuDao.deleteByExample(example);
     }
-    
+
+    @Override
+    public int deleteByRoleAndMenus(Integer roleId, List<Integer> menuIds) {
+        RoleMenuExample example = new RoleMenuExample();
+        example.createCriteria()
+                .andRoleIdEqualTo(roleId)
+                .andMenuIdIn(menuIds);
+        return roleMenuDao.deleteByExample(example);
+    }
+
 }

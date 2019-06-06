@@ -6,6 +6,8 @@ import com.grass.api.vo.admin.PossessRole;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 
+import java.util.List;
+
 
 public interface AdminService extends BaseService<AdminVo,Long> {
 
@@ -23,5 +25,13 @@ public interface AdminService extends BaseService<AdminVo,Long> {
      * @return
      */
     PossessRole findPossessRoleByAdminId(Long adminId);
+
+    /**
+     * 分配角色给指定用户
+     * @param roleIds
+     * @param adminId
+     */
+    void assignRoleToAdmin(List<Integer> roleIds, Long adminId);
+
 
 }

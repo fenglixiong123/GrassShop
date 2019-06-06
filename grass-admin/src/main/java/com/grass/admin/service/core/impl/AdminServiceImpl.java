@@ -6,10 +6,13 @@ import com.github.pagehelper.PageInfo;
 import com.grass.admin.dao.AdminDao;
 import com.grass.admin.model.Admin;
 import com.grass.admin.model.AdminExample;
+import com.grass.admin.model.AdminRole;
 import com.grass.admin.service.relation.AdminRoleService;
 import com.grass.admin.service.core.AdminService;
 import com.grass.admin.service.core.RoleService;
+import com.grass.admin.utils.AssignUtil;
 import com.grass.admin.utils.CopyUtil;
+import com.grass.admin.vo.AddDeleteVo;
 import com.grass.api.vo.admin.AdminVo;
 import com.grass.api.vo.admin.PossessRole;
 import com.grass.api.vo.admin.RoleVo;
@@ -24,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -129,6 +133,29 @@ public class AdminServiceImpl implements AdminService {
             hasRoles = roleService.findListByAdminId(adminId);
         }
         return new PossessRole(allRoles,hasRoles);
+    }
+
+    /**
+     * 分配角色给某个用户，涉及到有的角色删除有的角色增加
+     * @param roleIds
+     * @param adminId
+     */
+    public void assignRoleToAdmin(List<Integer> roleIds, Long adminId){
+        //1.首先拿到已拥有的角色
+        List<Integer> hasRoleIds = adminRoleService.findRoleIdsByAdminId(adminId);
+        //2.分离需要新增和需要删除的
+        AddDeleteVo resolve = AssignUtil.resolve(hasRoleIds, roleIds);
+        List<Integer> needAdd = resolve.getNeedAdd();
+        List<Integer> needDelete = resolve.getNeedDelete();
+        //3.删除已有的角色关系
+        if(CommonUtils.isNotEmpty(needDelete)) {
+            adminRoleService.deleteByAdminAndRoles(adminId,needDelete);
+        }
+        //4.新增所需的角色关系
+        if(CommonUtils.isNotEmpty(needAdd)) {
+            needAdd.forEach(roleId->adminRoleService.add(new AdminRole(adminId,roleId)));
+        }
+
     }
 
 }

@@ -24,4 +24,6 @@ public interface RoleMenuService {
 
     int deleteByMenuIds(List<Integer> ids);
 
+    int deleteByRoleAndMenus(Integer roleId,List<Integer> menuIds);
+
 }

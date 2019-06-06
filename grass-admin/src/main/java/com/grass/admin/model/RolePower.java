@@ -1,11 +1,14 @@
 package com.grass.admin.model;
 
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * role_power
  * @author 
  */
+@NoArgsConstructor
 public class RolePower implements Serializable {
     private Integer id;
 
@@ -18,6 +21,11 @@ public class RolePower implements Serializable {
      * 权限ID
      */
     private Integer powerId;
+
+    public RolePower(Integer roleId, Integer powerId) {
+        this.roleId = roleId;
+        this.powerId = powerId;
+    }
 
     private static final long serialVersionUID = 1L;
 
