@@ -1,9 +1,9 @@
-package com.grass.admin.service.impl;
+package com.grass.admin.service.relation.impl;
 
 import com.grass.admin.dao.RoleMenuDao;
 import com.grass.admin.model.RoleMenu;
 import com.grass.admin.model.RoleMenuExample;
-import com.grass.admin.service.RoleMenuService;
+import com.grass.admin.service.relation.RoleMenuService;
 import com.grass.common.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

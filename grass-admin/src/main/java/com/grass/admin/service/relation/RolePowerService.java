@@ -1,4 +1,4 @@
-package com.grass.admin.service;
+package com.grass.admin.service.relation;
 
 import com.grass.admin.model.RolePower;
 

@@ -1,4 +1,4 @@
-package com.grass.admin.service;
+package com.grass.admin.service.core;
 
 import com.grass.api.vo.admin.PowerVo;
 

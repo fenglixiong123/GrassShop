@@ -1,6 +1,6 @@
 package com.grass.admin.controller;
 
-import com.grass.admin.service.AdminService;
+import com.grass.admin.service.core.AdminService;
 import com.grass.api.vo.admin.AdminVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

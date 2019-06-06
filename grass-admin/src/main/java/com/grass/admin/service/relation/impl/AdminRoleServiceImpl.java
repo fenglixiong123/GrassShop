@@ -1,10 +1,9 @@
-package com.grass.admin.service.impl;
+package com.grass.admin.service.relation.impl;
 
 import com.grass.admin.dao.AdminRoleDao;
 import com.grass.admin.model.AdminRole;
 import com.grass.admin.model.AdminRoleExample;
-import com.grass.admin.service.AdminRoleService;
-import com.grass.common.utils.CommonUtils;
+import com.grass.admin.service.relation.AdminRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

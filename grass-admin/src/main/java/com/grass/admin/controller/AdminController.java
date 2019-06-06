@@ -1,6 +1,6 @@
 package com.grass.admin.controller;
 
-import com.grass.admin.service.AdminService;
+import com.grass.admin.service.core.AdminService;
 import com.grass.api.vo.admin.AdminVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;

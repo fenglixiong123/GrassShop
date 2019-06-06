@@ -1,6 +1,6 @@
 package com.grass.admin.controller;
 
-import com.grass.admin.service.PowerService;
+import com.grass.admin.service.core.PowerService;
 import com.grass.admin.utils.ConvertTreeUtil;
 import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.page.PageQuery;

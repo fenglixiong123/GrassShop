@@ -1,6 +1,6 @@
 package com.grass.admin.controller;
 
-import com.grass.admin.service.RoleService;
+import com.grass.admin.service.core.RoleService;
 import com.grass.api.vo.admin.RoleVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;

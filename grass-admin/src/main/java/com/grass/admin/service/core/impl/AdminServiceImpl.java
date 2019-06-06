@@ -1,4 +1,4 @@
-package com.grass.admin.service.impl;
+package com.grass.admin.service.core.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -6,10 +6,13 @@ import com.github.pagehelper.PageInfo;
 import com.grass.admin.dao.AdminDao;
 import com.grass.admin.model.Admin;
 import com.grass.admin.model.AdminExample;
-import com.grass.admin.service.AdminRoleService;
-import com.grass.admin.service.AdminService;
+import com.grass.admin.service.relation.AdminRoleService;
+import com.grass.admin.service.core.AdminService;
+import com.grass.admin.service.core.RoleService;
 import com.grass.admin.utils.CopyUtil;
 import com.grass.api.vo.admin.AdminVo;
+import com.grass.api.vo.admin.PossessRole;
+import com.grass.api.vo.admin.RoleVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import com.grass.common.utils.CommonUtils;
@@ -35,6 +38,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminDao adminDao;
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private AdminRoleService adminRoleService;
 
@@ -114,6 +119,16 @@ public class AdminServiceImpl implements AdminService {
             }
         }
         return adminDao.selectByExample(example);
+    }
+
+    @Override
+    public PossessRole findPossessRoleByAdminId(Long adminId){
+        List<RoleVo> allRoles = roleService.listAll(null);
+        List<RoleVo> hasRoles = null;
+        if(allRoles!=null) {
+            hasRoles = roleService.findListByAdminId(adminId);
+        }
+        return new PossessRole(allRoles,hasRoles);
     }
 
 }

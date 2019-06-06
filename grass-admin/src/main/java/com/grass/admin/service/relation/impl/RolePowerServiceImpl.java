@@ -1,9 +1,9 @@
-package com.grass.admin.service.impl;
+package com.grass.admin.service.relation.impl;
 
 import com.grass.admin.dao.RolePowerDao;
 import com.grass.admin.model.RolePower;
 import com.grass.admin.model.RolePowerExample;
-import com.grass.admin.service.RolePowerService;
+import com.grass.admin.service.relation.RolePowerService;
 import com.grass.common.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

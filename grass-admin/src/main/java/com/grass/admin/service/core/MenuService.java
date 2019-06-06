@@ -1,5 +1,6 @@
-package com.grass.admin.service;
+package com.grass.admin.service.core;
 
+import com.grass.admin.service.BaseService;
 import com.grass.api.vo.admin.MenuVo;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * @Create 2019/5/29 22:46
  * @Description
  **/
-public interface MenuService extends BaseService<MenuVo,Integer>{
+public interface MenuService extends BaseService<MenuVo,Integer> {
 
     List<MenuVo> findListByAdminId(Long adminId);
 

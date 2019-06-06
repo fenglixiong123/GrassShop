@@ -1,4 +1,4 @@
-package com.grass.admin.service.impl;
+package com.grass.admin.service.core.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -6,9 +6,9 @@ import com.github.pagehelper.PageInfo;
 import com.grass.admin.dao.PowerDao;
 import com.grass.admin.model.Power;
 import com.grass.admin.model.PowerExample;
-import com.grass.admin.service.AdminRoleService;
-import com.grass.admin.service.PowerService;
-import com.grass.admin.service.RolePowerService;
+import com.grass.admin.service.relation.AdminRoleService;
+import com.grass.admin.service.core.PowerService;
+import com.grass.admin.service.relation.RolePowerService;
 import com.grass.admin.utils.CopyUtil;
 import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.page.PageQuery;

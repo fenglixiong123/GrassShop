@@ -1,6 +1,6 @@
 package com.grass.admin.controller;
 
-import com.grass.admin.service.MenuService;
+import com.grass.admin.service.core.MenuService;
 import com.grass.admin.utils.ConvertTreeUtil;
 import com.grass.api.vo.admin.MenuVo;
 import com.grass.common.page.PageQuery;
