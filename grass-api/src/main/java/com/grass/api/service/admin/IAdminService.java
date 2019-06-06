@@ -1,10 +1,7 @@
 package com.grass.api.service.admin;
 
 import com.grass.api.service.admin.fallback.AdminServiceFallbackFactory;
-import com.grass.api.vo.admin.AdminVo;
-import com.grass.api.vo.admin.MenuVo;
-import com.grass.api.vo.admin.PowerVo;
-import com.grass.api.vo.admin.RoleVo;
+import com.grass.api.vo.admin.*;
 import com.grass.common.constants.AppConstant;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
@@ -47,6 +44,14 @@ public interface IAdminService {
     //根据用户名密码查询用户
     @PostMapping("/admin/getAdminByUsernameAndPassword")
     AdminVo getAdminByUsernameAndPassword(@RequestParam("username") String username, @RequestParam("password") String password);
+
+    //根据用户ID查询拥有的角色
+    @GetMapping("/admin/findPossessRoleByAdminId/{id}")
+    PossessRole findPossessRoleByAdminId(@PathVariable("id") Long id);
+
+    //分配角色给用户
+    @PostMapping("/admin/assignRoleToAdmin")
+    void assignRoleToAdmin(@RequestParam("roleIds") List<Integer> roleIds, @RequestParam("adminId") Long adminId);
 
     //角色相关API-----------------------------------------------------------------------------------------
 

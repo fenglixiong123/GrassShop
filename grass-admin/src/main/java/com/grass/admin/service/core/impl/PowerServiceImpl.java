@@ -147,14 +147,16 @@ public class PowerServiceImpl implements PowerService {
 
     private List<Power> queryList(PageQuery<PowerVo> pageQuery){
         PowerExample example = new PowerExample();
-        PowerVo queryVo = pageQuery.getEntity();
-        if(queryVo!=null){
-            PowerExample.Criteria criteria = example.createCriteria();
-            if(queryVo.getId()!=null){
-                criteria.andIdEqualTo(queryVo.getId());
-            }
-            if(StringUtils.isNotBlank(queryVo.getTitle())){
-                criteria.andTitleLike("%"+queryVo.getTitle()+"%");
+        if(pageQuery!=null) {
+            PowerVo queryVo = pageQuery.getEntity();
+            if (queryVo != null) {
+                PowerExample.Criteria criteria = example.createCriteria();
+                if (queryVo.getId() != null) {
+                    criteria.andIdEqualTo(queryVo.getId());
+                }
+                if (StringUtils.isNotBlank(queryVo.getTitle())) {
+                    criteria.andTitleLike("%" + queryVo.getTitle() + "%");
+                }
             }
         }
         return powerDao.selectByExample(example);

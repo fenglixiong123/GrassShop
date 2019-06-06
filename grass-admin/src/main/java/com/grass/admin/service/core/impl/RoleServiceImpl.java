@@ -133,14 +133,16 @@ public class RoleServiceImpl implements RoleService {
 
     private List<Role> queryList(PageQuery<RoleVo> pageQuery){
         RoleExample example = new RoleExample();
-        RoleVo queryVo = pageQuery.getEntity();
-        if(queryVo!=null){
-            RoleExample.Criteria criteria = example.createCriteria();
-            if(queryVo.getId()!=null){
-                criteria.andIdEqualTo(queryVo.getId());
-            }
-            if(StringUtils.isNotBlank(queryVo.getTitle())){
-                criteria.andTitleLike("%"+queryVo.getTitle()+"%");
+        if(pageQuery!=null) {
+            RoleVo queryVo = pageQuery.getEntity();
+            if (queryVo != null) {
+                RoleExample.Criteria criteria = example.createCriteria();
+                if (queryVo.getId() != null) {
+                    criteria.andIdEqualTo(queryVo.getId());
+                }
+                if (StringUtils.isNotBlank(queryVo.getTitle())) {
+                    criteria.andTitleLike("%" + queryVo.getTitle() + "%");
+                }
             }
         }
         return roleDao.selectByExample(example);

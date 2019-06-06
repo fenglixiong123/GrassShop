@@ -5,6 +5,7 @@ import com.grass.api.vo.admin.PowerVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import com.grass.common.result.ResultResponse;
+import com.grass.common.utils.json.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -31,35 +32,35 @@ public class ConsolePowerController {
     @GetMapping("/{id}")
     @ApiOperation(value = "根据ID查询权限")
     public ResultResponse<PowerVo> getPower(@PathVariable("id") Integer id){
-        log.info("getPower------>");
+        log.info("getPower------>id:{}",id);
         return ResultResponse.ok(adminService.getPower(id));
     }
 
     @PostMapping
     @ApiOperation(value = "新增权限")
     public ResultResponse<Integer> addPower(@Valid @RequestBody PowerVo powerVo){
-        log.info("addPower------>");
+        log.info("addPower------>powerVo:{}", JsonUtils.toJsonMsg(powerVo));
         return ResultResponse.ok(adminService.addPower(powerVo));
     }
 
     @PutMapping
     @ApiOperation(value = "修改权限")
     public ResultResponse<Integer> updatePower(@RequestBody PowerVo powerVo){
-        log.info("updatePower------>");
+        log.info("updatePower------>powerVo:{}",JsonUtils.toJsonMsg(powerVo));
         return ResultResponse.ok(adminService.updatePower(powerVo));
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除权限")
     public ResultResponse<Integer> deletePower(@PathVariable("id") Integer id){
-        log.info("deletePower------>");
+        log.info("deletePower------>id:{}",id);
         return ResultResponse.ok(adminService.deletePower(id));
     }
 
     @PostMapping("/list")
     @ApiOperation(value = "分页查询权限")
     public ResultResponse<PageResult<PowerVo>> listPagePower(@RequestBody(required = false) PageQuery<PowerVo> pageQuery){
-        log.info("listPagePower------>");
+        log.info("listPagePower------>pageQuery:{}",JsonUtils.toJsonMsg(pageQuery));
         return ResultResponse.ok(adminService.listPagePower(pageQuery));
     }
     

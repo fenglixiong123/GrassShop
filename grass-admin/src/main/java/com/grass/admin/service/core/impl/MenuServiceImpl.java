@@ -136,14 +136,16 @@ public class MenuServiceImpl implements MenuService {
 
     private List<Menu> queryList(PageQuery<MenuVo> pageQuery){
         MenuExample example = new MenuExample();
-        MenuVo queryVo = pageQuery.getEntity();
-        if(queryVo!=null){
-            MenuExample.Criteria criteria = example.createCriteria();
-            if(queryVo.getId()!=null){
-                criteria.andIdEqualTo(queryVo.getId());
-            }
-            if(StringUtils.isNotBlank(queryVo.getTitle())){
-                criteria.andTitleLike("%"+queryVo.getTitle()+"%");
+        if(pageQuery!=null) {
+            MenuVo queryVo = pageQuery.getEntity();
+            if (queryVo != null) {
+                MenuExample.Criteria criteria = example.createCriteria();
+                if (queryVo.getId() != null) {
+                    criteria.andIdEqualTo(queryVo.getId());
+                }
+                if (StringUtils.isNotBlank(queryVo.getTitle())) {
+                    criteria.andTitleLike("%" + queryVo.getTitle() + "%");
+                }
             }
         }
         return menuDao.selectByExample(example);

@@ -109,17 +109,19 @@ public class AdminServiceImpl implements AdminService {
 
     private List<Admin> queryList(PageQuery<AdminVo> pageQuery){
         AdminExample example = new AdminExample();
-        AdminVo queryVo = pageQuery.getEntity();
-        if(queryVo!=null){
-            AdminExample.Criteria criteria = example.createCriteria();
-            if(StringUtils.isNotBlank(queryVo.getUsername())){
-                criteria.andUsernameLike("%"+queryVo.getUsername()+"%");
-            }
-            if(StringUtils.isNotBlank(queryVo.getNickname())){
-                criteria.andNicknameLike("%"+queryVo.getNickname()+"%");
-            }
-            if(queryVo.getSex()!=null){
-                criteria.andSexEqualTo(queryVo.getSex());
+        if(pageQuery!=null) {
+            AdminVo queryVo = pageQuery.getEntity();
+            if (queryVo != null) {
+                AdminExample.Criteria criteria = example.createCriteria();
+                if (StringUtils.isNotBlank(queryVo.getUsername())) {
+                    criteria.andUsernameLike("%" + queryVo.getUsername() + "%");
+                }
+                if (StringUtils.isNotBlank(queryVo.getNickname())) {
+                    criteria.andNicknameLike("%" + queryVo.getNickname() + "%");
+                }
+                if (queryVo.getSex() != null) {
+                    criteria.andSexEqualTo(queryVo.getSex());
+                }
             }
         }
         return adminDao.selectByExample(example);

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @Create 2019/5/18 14:56
  * @Description
  **/
-@Component
+//@Component
 public class GrassAdminException extends CoreExceptionHandler {
 
 }

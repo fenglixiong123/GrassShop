@@ -1,10 +1,7 @@
 package com.grass.api.service.admin.fallback;
 
 import com.grass.api.service.admin.IAdminService;
-import com.grass.api.vo.admin.AdminVo;
-import com.grass.api.vo.admin.MenuVo;
-import com.grass.api.vo.admin.PowerVo;
-import com.grass.api.vo.admin.RoleVo;
+import com.grass.api.vo.admin.*;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import feign.hystrix.FallbackFactory;
@@ -49,6 +46,14 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
 
             public AdminVo getAdminByUsernameAndPassword(String username, String password) {
                 return new AdminVo(-99L,"default");
+            }
+
+            public PossessRole findPossessRoleByAdminId(Long id) {
+                return null;
+            }
+
+            public void assignRoleToAdmin(List<Integer> roleIds, Long adminId) {
+
             }
 
             public RoleVo getRole(Integer id) {

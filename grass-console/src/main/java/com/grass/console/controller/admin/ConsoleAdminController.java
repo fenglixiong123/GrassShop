@@ -2,6 +2,7 @@ package com.grass.console.controller.admin;
 
 import com.grass.api.service.admin.IAdminService;
 import com.grass.api.vo.admin.AdminVo;
+import com.grass.api.vo.admin.PossessRole;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import com.grass.common.result.ResultResponse;
@@ -74,5 +75,22 @@ public class ConsoleAdminController {
         }
         return ResultResponse.ok(adminService.listPageAdmin(pageQuery));
     }
+
+    @ApiOperation(value = "根据用户ID查询拥有的角色")
+    @GetMapping("/findPossessRoleByAdminId/{id}")
+    public ResultResponse<PossessRole> findPossessRoleByAdminId(@PathVariable("id") Long id){
+        log.info("findPossessRoleByAdminId----->id:{}",id);
+        return ResultResponse.ok(adminService.findPossessRoleByAdminId(id));
+    }
+
+    @ApiOperation(value = "分配角色给用户")
+    @PostMapping("/assignRoleToAdmin")
+    public ResultResponse assignRoleToAdmin(@RequestParam("roleIds") List<Integer> roleIds,
+                                            @RequestParam("adminId") Long adminId){
+        log.info("assignRoleToAdmin----->adminId:{},roleIds:{}",adminId,roleIds);
+        adminService.assignRoleToAdmin(roleIds,adminId);
+        return ResultResponse.ok();
+    }
+
 
 }

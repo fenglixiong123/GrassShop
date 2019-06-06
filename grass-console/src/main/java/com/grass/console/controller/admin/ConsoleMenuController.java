@@ -5,6 +5,7 @@ import com.grass.api.vo.admin.MenuVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
 import com.grass.common.result.ResultResponse;
+import com.grass.common.utils.json.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -31,35 +32,35 @@ public class ConsoleMenuController {
     @GetMapping("/{id}")
     @ApiOperation(value = "根据ID查询菜单")
     public ResultResponse<MenuVo> getMenu(@PathVariable("id") Integer id){
-        log.info("getMenu------>");
+        log.info("getMenu------>id:{}",id);
         return ResultResponse.ok(adminService.getMenu(id));
     }
 
     @PostMapping
     @ApiOperation(value = "新增菜单")
     public ResultResponse<Integer> addMenu(@Valid @RequestBody MenuVo menuVo){
-        log.info("addMenu------>");
+        log.info("addMenu------>menuVo:{}",JsonUtils.toJsonMsg(menuVo));
         return ResultResponse.ok(adminService.addMenu(menuVo));
     }
 
     @PutMapping
     @ApiOperation(value = "修改菜单")
     public ResultResponse<Integer> updateMenu(@RequestBody MenuVo menuVo){
-        log.info("updateMenu------>");
+        log.info("updateMenu------>menuVo:{}",JsonUtils.toJsonMsg(menuVo));
         return ResultResponse.ok(adminService.updateMenu(menuVo));
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除菜单")
     public ResultResponse<Integer> deleteMenu(@PathVariable("id") Integer id){
-        log.info("deleteMenu------>");
+        log.info("deleteMenu------>id:{}",id);
         return ResultResponse.ok(adminService.deleteMenu(id));
     }
 
     @PostMapping("/list")
     @ApiOperation(value = "分页查询菜单")
     public ResultResponse<PageResult<MenuVo>> listPageMenu(@RequestBody(required = false) PageQuery<MenuVo> pageQuery){
-        log.info("listPageMenu------>");
+        log.info("listPageMenu------>pageQuery:{}", JsonUtils.toJsonMsg(pageQuery));
         return ResultResponse.ok(adminService.listPageMenu(pageQuery));
     }
     
