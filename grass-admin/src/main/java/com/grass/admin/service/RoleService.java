@@ -8,4 +8,6 @@ public interface RoleService extends BaseService<RoleVo,Integer>{
 
     List<RoleVo> findListByAdminId(Long adminId);
 
+    int deleteRoles(List<Integer> ids);
+
 }

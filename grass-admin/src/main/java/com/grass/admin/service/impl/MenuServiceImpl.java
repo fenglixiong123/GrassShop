@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -112,8 +113,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Transactional
     public int delete(Integer id) {
-        return menuDao.deleteByPrimaryKey(id);
+        int res = menuDao.deleteByPrimaryKey(id);
+        //删除角色菜单关系
+        roleMenuService.deleteByMenuId(id);
+        return res;
     }
 
     @Override

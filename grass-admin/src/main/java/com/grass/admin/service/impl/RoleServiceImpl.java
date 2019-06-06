@@ -7,6 +7,8 @@ import com.grass.admin.dao.RoleDao;
 import com.grass.admin.model.Role;
 import com.grass.admin.model.RoleExample;
 import com.grass.admin.service.AdminRoleService;
+import com.grass.admin.service.RoleMenuService;
+import com.grass.admin.service.RolePowerService;
 import com.grass.admin.service.RoleService;
 import com.grass.admin.utils.CopyUtil;
 import com.grass.api.vo.admin.RoleVo;
@@ -18,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +35,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private AdminRoleService adminRoleService;
+    @Autowired
+    private RoleMenuService roleMenuService;
+    @Autowired
+    private RolePowerService rolePowerService;
     @Autowired
     private RoleDao roleDao;
 
@@ -71,8 +78,31 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public int delete(Integer id) {
-        return roleDao.deleteByPrimaryKey(id);
+        int res = roleDao.deleteByPrimaryKey(id);
+        //删除用户角色关系
+        adminRoleService.deleteByRoleId(id);
+        //删除角色菜单关系
+        roleMenuService.deleteByRoleId(id);
+        //删除角色权限关系
+        rolePowerService.deleteByRoleId(id);
+        return res;
+    }
+
+    @Override
+    @Transactional
+    public int deleteRoles(List<Integer> ids){
+        RoleExample example = new RoleExample();
+        example.createCriteria().andIdIn(ids);
+        int res = roleDao.deleteByExample(example);
+        //删除用户角色关系
+        adminRoleService.deleteByRoleIds(ids);
+        //删除角色菜单关系
+        roleMenuService.deleteByRoleIds(ids);
+        //删除角色权限关系
+        rolePowerService.deleteByRoleIds(ids);
+        return res;
     }
 
     @Override

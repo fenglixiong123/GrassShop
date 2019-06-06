@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -122,8 +123,12 @@ public class PowerServiceImpl implements PowerService {
     }
 
     @Override
+    @Transactional
     public int delete(Integer id) {
-        return powerDao.deleteByPrimaryKey(id);
+        int res = powerDao.deleteByPrimaryKey(id);
+        //删除角色权限关系
+        rolePowerService.deleteByPowerId(id);
+        return res;
     }
 
     @Override

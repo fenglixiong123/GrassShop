@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.grass.admin.dao.AdminDao;
 import com.grass.admin.model.Admin;
 import com.grass.admin.model.AdminExample;
+import com.grass.admin.service.AdminRoleService;
 import com.grass.admin.service.AdminService;
 import com.grass.admin.utils.CopyUtil;
 import com.grass.api.vo.admin.AdminVo;
@@ -34,6 +35,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminDao adminDao;
+    @Autowired
+    private AdminRoleService adminRoleService;
 
     @Override
     public AdminVo get(Long id) {
@@ -64,8 +67,8 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public int delete(Long id) {
         int res = adminDao.deleteByPrimaryKey(id);
-        //此处需要删除用户对应的角色关系
-
+        //删除用户角色关系
+        adminRoleService.deleteByAdminId(id);
         return res;
     }
 
