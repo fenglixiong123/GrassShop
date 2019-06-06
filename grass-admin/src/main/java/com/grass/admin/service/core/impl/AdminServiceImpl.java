@@ -130,9 +130,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public PossessRole findPossessRoleByAdminId(Long adminId){
         List<RoleVo> allRoles = roleService.listAll(null);
-        List<RoleVo> hasRoles = null;
+        List<Integer> hasRoles = null;
         if(allRoles!=null) {
-            hasRoles = roleService.findListByAdminId(adminId);
+            hasRoles = adminRoleService.findRoleIdsByAdminId(adminId);
         }
         return new PossessRole(allRoles,hasRoles);
     }
@@ -143,21 +143,26 @@ public class AdminServiceImpl implements AdminService {
      * @param adminId
      */
     public void assignRoleToAdmin(List<Integer> roleIds, Long adminId){
+        log.info("准备开始给用户【{}】分配角色{}...",adminId,roleIds);
         //1.首先拿到已拥有的角色
         List<Integer> hasRoleIds = adminRoleService.findRoleIdsByAdminId(adminId);
+        log.info("查询到已经拥有的角色:{}",hasRoleIds);
         //2.分离需要新增和需要删除的
         AddDeleteVo resolve = AssignUtil.resolve(hasRoleIds, roleIds);
         List<Integer> needAdd = resolve.getNeedAdd();
         List<Integer> needDelete = resolve.getNeedDelete();
+        log.info("需要删除的角色:{},需要新增的角色:{}",needDelete,needAdd);
         //3.删除已有的角色关系
         if(CommonUtils.isNotEmpty(needDelete)) {
+            log.info("执行删除角色关系...{}",needDelete);
             adminRoleService.deleteByAdminAndRoles(adminId,needDelete);
         }
         //4.新增所需的角色关系
         if(CommonUtils.isNotEmpty(needAdd)) {
+            log.info("执行新增角色关系...{}",needAdd);
             needAdd.forEach(roleId->adminRoleService.add(new AdminRole(adminId,roleId)));
         }
-
+        log.info("已经成功完成对用户角色分配！");
     }
 
 }

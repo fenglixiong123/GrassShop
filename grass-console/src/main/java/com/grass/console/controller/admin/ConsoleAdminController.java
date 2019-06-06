@@ -85,8 +85,8 @@ public class ConsoleAdminController {
 
     @ApiOperation(value = "分配角色给用户")
     @PostMapping("/assignRoleToAdmin")
-    public ResultResponse assignRoleToAdmin(@RequestParam("roleIds") List<Integer> roleIds,
-                                            @RequestParam("adminId") Long adminId){
+    public ResultResponse assignRoleToAdmin(@RequestParam("adminId") Long adminId,
+                                            @RequestParam(required = false) List<Integer> roleIds){
         log.info("assignRoleToAdmin----->adminId:{},roleIds:{}",adminId,roleIds);
         adminService.assignRoleToAdmin(roleIds,adminId);
         return ResultResponse.ok();

@@ -16,9 +16,9 @@ public class PossessRole {
 
     private List<RoleVo> allRoles;
 
-    private List<RoleVo> hasRoles;
+    private List<Integer> hasRoles;
 
-    public PossessRole(List<RoleVo> allRoles, List<RoleVo> hasRoles) {
+    public PossessRole(List<RoleVo> allRoles, List<Integer> hasRoles) {
         this.allRoles = allRoles;
         this.hasRoles = hasRoles;
     }

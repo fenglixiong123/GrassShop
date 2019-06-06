@@ -94,8 +94,8 @@ public class AdminController {
      * @param adminId
      */
     @PostMapping("/assignRoleToAdmin")
-    public void assignRoleToAdmin(@RequestParam List<Integer> roleIds,
-                                  @RequestParam Long adminId){
+    public void assignRoleToAdmin(@RequestParam Long adminId,
+                                  @RequestParam(required = false) List<Integer> roleIds){
         log.info("assignRoleToAdmin--------->roleIds:{},adminId:{}",roleIds,adminId);
         adminService.assignRoleToAdmin(roleIds,adminId);
     }

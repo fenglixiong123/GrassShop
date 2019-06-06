@@ -12,18 +12,24 @@ import java.util.List;
  */
 public class AssignUtil {
 
-    public static AddDeleteVo resolve(List<Integer> ownList,List<Integer> newList){
+    public static AddDeleteVo resolve(List<Integer> oldList,List<Integer> newList){
+        if(newList==null){
+            return new AddDeleteVo(null,oldList);
+        }
+        if(oldList==null){
+            return new AddDeleteVo(newList,null);
+        }
         List<Integer> needDelete = new ArrayList<>();
         List<Integer> needAdd = new ArrayList<>(newList);
-        for (int i = 0; i < ownList.size(); i++) {
-            Integer temp = ownList.get(i);
+        for (int i = 0; i < oldList.size(); i++) {
+            Integer temp = oldList.get(i);
             if(needAdd.contains(temp)){
                 needAdd.remove(temp);
             }else {
                 needDelete.add(temp);
             }
         }
-        return new AddDeleteVo();
+        return new AddDeleteVo(needAdd,needDelete);
     }
 
 }

@@ -5,6 +5,7 @@ import com.grass.api.vo.admin.*;
 import com.grass.common.constants.AppConstant;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
+import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
