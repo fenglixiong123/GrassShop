@@ -77,4 +77,38 @@ public class RolePowerServiceImpl implements RolePowerService {
         return powerIds;
     }
 
+    @Override
+    public Integer add(RolePower rolePower) {
+        return rolePowerDao.insertSelective(rolePower);
+    }
+
+    @Override
+    public int deleteByRoleId(Integer id) {
+        RolePowerExample example = new RolePowerExample();
+        example.createCriteria().andRoleIdEqualTo(id);
+        return rolePowerDao.deleteByExample(example);
+    }
+
+    @Override
+    public int deleteByRoleIds(List<Integer> ids) {
+        RolePowerExample example = new RolePowerExample();
+        example.createCriteria().andRoleIdIn(ids);
+        return rolePowerDao.deleteByExample(example);
+    }
+
+    @Override
+    public int deleteByPowerId(Integer id) {
+        RolePowerExample example = new RolePowerExample();
+        example.createCriteria().andPowerIdEqualTo(id);
+        return rolePowerDao.deleteByExample(example);
+    }
+
+    @Override
+    public int deleteByPowerIds(List<Integer> ids) {
+        RolePowerExample example = new RolePowerExample();
+        example.createCriteria().andPowerIdIn(ids);
+        return rolePowerDao.deleteByExample(example);
+    }
+
+
 }

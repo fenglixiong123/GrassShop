@@ -76,5 +76,33 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         }
         return menuIds;
     }
+
+    public Integer add(RoleMenu roleMenu){
+        return roleMenuDao.insertSelective(roleMenu);
+    }
+
+    public int deleteByRoleId(Integer id){
+        RoleMenuExample example = new RoleMenuExample();
+        example.createCriteria().andRoleIdEqualTo(id);
+        return roleMenuDao.deleteByExample(example);
+    }
+
+    public int deleteByRoleIds(List<Integer> ids){
+        RoleMenuExample example = new RoleMenuExample();
+        example.createCriteria().andRoleIdIn(ids);
+        return roleMenuDao.deleteByExample(example);
+    }
+
+    public int deleteByMenuId(Integer id){
+        RoleMenuExample example = new RoleMenuExample();
+        example.createCriteria().andMenuIdEqualTo(id);
+        return roleMenuDao.deleteByExample(example);
+    }
+
+    public int deleteByMenuIds(List<Integer> ids){
+        RoleMenuExample example = new RoleMenuExample();
+        example.createCriteria().andMenuIdIn(ids);
+        return roleMenuDao.deleteByExample(example);
+    }
     
 }

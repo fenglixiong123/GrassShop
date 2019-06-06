@@ -14,4 +14,14 @@ public interface RoleMenuService {
 
     List<Integer> findMenuIdsByRoleIds(List<Integer> roleIds);
 
+    Integer add(RoleMenu roleMenu);
+
+    int deleteByRoleId(Integer id);
+
+    int deleteByRoleIds(List<Integer> ids);
+
+    int deleteByMenuId(Integer id);
+
+    int deleteByMenuIds(List<Integer> ids);
+
 }

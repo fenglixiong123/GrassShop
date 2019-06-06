@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -60,8 +61,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional
     public int delete(Long id) {
-        return adminDao.deleteByPrimaryKey(id);
+        int res = adminDao.deleteByPrimaryKey(id);
+        //此处需要删除用户对应的角色关系
+
+        return res;
     }
 
     @Override

@@ -10,5 +10,12 @@ public interface AdminRoleService {
 
     List<Integer> findRoleIdsByAdminId(Long adminId);
 
+    Integer add(AdminRole adminRole);
+
+    int deleteByAdminId(Long id);
+
+    int deleteByRoleId(Integer id);
+
+    int deleteByRoleIds(List<Integer> ids);
 
 }

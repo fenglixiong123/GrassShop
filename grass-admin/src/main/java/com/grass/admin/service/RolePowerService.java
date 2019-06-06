@@ -19,4 +19,14 @@ public interface RolePowerService {
 
     List<Integer> findPowerIdsByRoleIds(List<Integer> roleIds);
 
+    Integer add(RolePower rolePower);
+
+    int deleteByRoleId(Integer id);
+
+    int deleteByRoleIds(List<Integer> ids);
+
+    int deleteByPowerId(Integer id);
+
+    int deleteByPowerIds(List<Integer> ids);
+
 }
