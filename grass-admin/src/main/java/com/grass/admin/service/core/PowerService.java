@@ -1,10 +1,11 @@
 package com.grass.admin.service.core;
 
+import com.grass.admin.service.BaseService;
 import com.grass.api.vo.admin.PowerVo;
 
 import java.util.List;
 
-public interface PowerService extends BaseService<PowerVo,Integer>{
+public interface PowerService extends BaseService<PowerVo,Integer> {
 
     List<PowerVo> findList();
 

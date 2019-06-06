@@ -3,6 +3,8 @@ package com.grass.api.vo.admin;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @Author: Fenglixiong
  * @Date: 2019/6/6 16:39
@@ -11,4 +13,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PossessPower {
+
+    private List<PowerVo> allPowers;
+
+    private List<PowerVo> hasPowers;
+
+    public PossessPower(List<PowerVo> allPowers, List<PowerVo> hasPowers) {
+        this.allPowers = allPowers;
+        this.hasPowers = hasPowers;
+    }
 }
