@@ -49,7 +49,7 @@ public class AdminVo {
     /**
      * 性别1男2女
      */
-    @Range(min = 1,max = 2)
+    @Range(min = 0,max = 1)
     private Integer sex;
 
     private String address;

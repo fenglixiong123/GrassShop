@@ -142,6 +142,7 @@ public class AdminServiceImpl implements AdminService {
      * @param roleIds
      * @param adminId
      */
+    @Transactional
     public void assignRoleToAdmin(List<Integer> roleIds, Long adminId){
         log.info("准备开始给用户【{}】分配角色{}...",adminId,roleIds);
         //1.首先拿到已拥有的角色
