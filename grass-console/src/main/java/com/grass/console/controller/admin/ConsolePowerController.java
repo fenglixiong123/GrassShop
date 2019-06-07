@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Author Fenglixiong
@@ -62,6 +63,13 @@ public class ConsolePowerController {
     public ResultResponse<PageResult<PowerVo>> listPagePower(@RequestBody(required = false) PageQuery<PowerVo> pageQuery){
         log.info("listPagePower------>pageQuery:{}",JsonUtils.toJsonMsg(pageQuery));
         return ResultResponse.ok(adminService.listPagePower(pageQuery));
+    }
+
+    @GetMapping("/tree")
+    @ApiOperation(value = "树形查询权限")
+    public ResultResponse<List<PowerVo>> treePower(){
+        log.info("tree---------->");
+        return ResultResponse.ok(adminService.treePower());
     }
     
     @GetMapping("/findPowerListByAdminId")

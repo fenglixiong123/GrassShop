@@ -74,13 +74,32 @@ public class MenuController {
         }
         return menuService.list(pageQuery);
     }
-    
+
+    /**
+     * 查询树形菜单
+     */
+    @GetMapping("/tree")
+    public List<MenuVo> tree(){
+        log.info("tree---------->");
+        return ConvertTreeUtil.listToTreeMenu(menuService.listAll(null));
+    }
+
+    /**
+     * 根据用户ID获取菜单列表用来登录时生成菜单侧边栏
+     * @param id
+     * @return
+     */
     @GetMapping("/findMenuListByAdminId")
     public List<MenuVo> findMenuListByAdminId(@RequestParam("id") Long id){
         log.info("findMenuListByAdminId---------->id:{}",id);
         return menuService.findListByAdminId(id);
     }
 
+    /**
+     * 根据用户ID获取树形菜单侧边栏
+     * @param id
+     * @return
+     */
     @GetMapping("/findMenuTreeByAdminId")
     public List<MenuVo> findMenuTreeByAdminId(@RequestParam("id") Long id){
         log.info("findMenuTreeByAdminId---------->id:{}",id);

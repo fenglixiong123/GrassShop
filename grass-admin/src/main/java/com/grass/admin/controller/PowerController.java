@@ -65,7 +65,6 @@ public class PowerController {
 
     /**
      * 分页查询权限
-     * @return
      */
     @PostMapping("/list")
     public PageResult<PowerVo> list(@RequestBody(required = false) PageQuery<PowerVo> pageQuery){
@@ -75,13 +74,32 @@ public class PowerController {
         }
         return powerService.list(pageQuery);
     }
-    
+
+    /**
+     * 树形查询权限
+     */
+    @GetMapping("/tree")
+    public List<PowerVo> tree(){
+        log.info("tree---------->");
+        return ConvertTreeUtil.listToTreePower(powerService.listAll(null));
+    }
+
+    /**
+     * 通过用户ID查询权限列表
+     * @param id
+     * @return
+     */
     @GetMapping("/findPowerListByAdminId")
     public List<PowerVo> findPowerListByAdminId(@RequestParam("id") Long id){
         log.info("findPowerListByAdminId---------->id:{}",id);
         return powerService.findListByAdminId(id);
     }
 
+    /**
+     * 通过用户ID查询权限树
+     * @param id
+     * @return
+     */
     @GetMapping("/findPowerByAdminId")
     public List<PowerVo> findPowerTreeByAdminId(@RequestParam("id") Long id){
         log.info("findPowerTreeByAdminId---------->id:{}",id);

@@ -88,6 +88,9 @@ public interface IAdminService {
     @PostMapping("/admin/menu/list")
     PageResult<MenuVo> listPageMenu(@RequestBody(required = false) PageQuery<MenuVo> pageQuery);
 
+    @GetMapping("/admin/menu/tree")
+    List<MenuVo> treeMenu();
+
     //通过adminId获取菜单集合
     @GetMapping("/admin/menu/findMenuListByAdminId")
     List<MenuVo> findMenuListByAdminId(@RequestParam("id") Long id);
@@ -112,6 +115,9 @@ public interface IAdminService {
 
     @PostMapping("/admin/power/list")
     PageResult<PowerVo> listPagePower(@RequestBody(required = false) PageQuery<PowerVo> pageQuery);
+
+    @GetMapping("/admin/power/tree")
+    List<PowerVo> treePower();
 
     //通过adminId获取权限集合
     @GetMapping("/admin/power/findPowerListByAdminId")

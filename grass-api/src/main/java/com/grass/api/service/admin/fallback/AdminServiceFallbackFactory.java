@@ -96,6 +96,10 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
                 return null;
             }
 
+            public List<MenuVo> treeMenu() {
+                return null;
+            }
+
             public List<MenuVo> findMenuListByAdminId(Long id) {
                 return null;
             }
@@ -121,6 +125,10 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
             }
 
             public PageResult<PowerVo> listPagePower(PageQuery<PowerVo> pageQuery) {
+                return null;
+            }
+
+            public List<PowerVo> treePower() {
                 return null;
             }
 

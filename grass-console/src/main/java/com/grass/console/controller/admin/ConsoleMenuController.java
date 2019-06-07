@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Author Fenglixiong
@@ -63,7 +64,14 @@ public class ConsoleMenuController {
         log.info("listPageMenu------>pageQuery:{}", JsonUtils.toJsonMsg(pageQuery));
         return ResultResponse.ok(adminService.listPageMenu(pageQuery));
     }
-    
+
+    @GetMapping("/tree")
+    @ApiOperation(value = "树形查询菜单")
+    public ResultResponse<List<MenuVo>> treeMenu(){
+        log.info("tree--------->");
+        return ResultResponse.ok(adminService.treeMenu());
+    }
+
     @GetMapping("/findMenuListByAdminId")
     @ApiOperation(value = "根据AdminId查询菜单列表")
     public ResultResponse findMenuListByAdminId(@RequestParam Long id){
