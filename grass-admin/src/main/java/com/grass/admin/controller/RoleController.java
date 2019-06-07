@@ -1,6 +1,8 @@
 package com.grass.admin.controller;
 
 import com.grass.admin.service.core.RoleService;
+import com.grass.api.vo.admin.PossessMenu;
+import com.grass.api.vo.admin.PossessPower;
 import com.grass.api.vo.admin.RoleVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Author Fenglixiong
@@ -74,6 +77,51 @@ public class RoleController {
         return roleService.list(pageQuery);
     }
 
+    /**
+     * 根据角色ID查询拥有的菜单
+     * @param id
+     * @return
+     */
+    @GetMapping("/findPossessMenuByRoleId/{id}")
+    public PossessMenu findPossessMenuByRoleId(@PathVariable Integer id){
+        log.info("findPossessMenuByRoleId--->id:{}",id);
+        return roleService.findPossessMenuByRoleId(id);
+    }
+
+    /**
+     * 分配菜单给角色
+     * @param roleId
+     * @param menuIds
+     */
+    @PostMapping("/assignMenuToRole")
+    public void assignMenuToRole(@RequestParam Integer roleId,
+                                  @RequestParam(required = false) List<Integer> menuIds){
+        log.info("assignMenuToRole--------->roleId:{},menuIds:{}",roleId,menuIds);
+        roleService.assignMenuToRole(menuIds,roleId);
+    }
+
+    /**
+     * 根据角色ID查询拥有的权限
+     * @param id
+     * @return
+     */
+    @GetMapping("/findPossessPowerByRoleId/{id}")
+    public PossessPower findPossessPowerByRoleId(@PathVariable Integer id){
+        log.info("findPossessPowerByRoleId--->id:{}",id);
+        return roleService.findPossessPowerByRoleId(id);
+    }
+
+    /**
+     * 分配权限给角色
+     * @param roleId
+     * @param powerIds
+     */
+    @PostMapping("/assignPowerToRole")
+    public void assignPowerToRole(@RequestParam Integer roleId,
+                                  @RequestParam(required = false) List<Integer> powerIds){
+        log.info("assignPowerToRole--------->roleId:{},powerIds:{}",roleId,powerIds);
+        roleService.assignPowerToRole(powerIds,roleId);
+    }
 
 
 }

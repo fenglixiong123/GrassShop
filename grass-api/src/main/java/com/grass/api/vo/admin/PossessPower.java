@@ -16,9 +16,9 @@ public class PossessPower {
 
     private List<PowerVo> allPowers;
 
-    private List<PowerVo> hasPowers;
+    private List<Integer> hasPowers;
 
-    public PossessPower(List<PowerVo> allPowers, List<PowerVo> hasPowers) {
+    public PossessPower(List<PowerVo> allPowers, List<Integer> hasPowers) {
         this.allPowers = allPowers;
         this.hasPowers = hasPowers;
     }

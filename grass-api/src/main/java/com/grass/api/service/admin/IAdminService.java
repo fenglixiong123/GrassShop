@@ -71,6 +71,18 @@ public interface IAdminService {
     @PostMapping("/admin/role/list")
     PageResult<RoleVo> listPageRole(@RequestBody(required = false) PageQuery<RoleVo> pageQuery);
 
+    @GetMapping("/admin/role/findPossessMenuByRoleId/{id}")
+    PossessMenu findPossessMenuByRoleId(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/role/assignMenuToRole")
+    void assignMenuToRole(@RequestParam("menuIds") List<Integer> menuIds,@RequestParam("roleId") Integer roleId);
+
+    @GetMapping("/admin/role/findPossessPowerByRoleId/{id}")
+    PossessPower findPossessPowerByRoleId(@PathVariable("id") Integer id);
+
+    @PostMapping("/admin/role/assignPowerToRole")
+    void assignPowerToRole(@RequestParam("powerIds") List<Integer> powerIds,@RequestParam("roleId") Integer roleId);
+
     //菜单相关API---------------------------------------------------------------------------------------
 
     @GetMapping("/admin/menu/{id}")

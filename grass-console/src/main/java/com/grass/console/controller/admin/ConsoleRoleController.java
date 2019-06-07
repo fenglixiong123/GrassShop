@@ -1,6 +1,8 @@
 package com.grass.console.controller.admin;
 
 import com.grass.api.service.admin.IAdminService;
+import com.grass.api.vo.admin.PossessMenu;
+import com.grass.api.vo.admin.PossessPower;
 import com.grass.api.vo.admin.RoleVo;
 import com.grass.common.page.PageQuery;
 import com.grass.common.page.PageResult;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Author Fenglixiong
@@ -62,6 +65,38 @@ public class ConsoleRoleController {
     public ResultResponse<PageResult<RoleVo>> listPageRole(@RequestBody(required = false) PageQuery<RoleVo> pageQuery){
         log.info("listPageRole------>pageQuery:{}",JsonUtils.toJsonMsg(pageQuery));
         return ResultResponse.ok(adminService.listPageRole(pageQuery));
+    }
+
+    @GetMapping("/findPossessMenuByRoleId/{id}")
+    @ApiOperation(value = "通过角色ID查询拥有的菜单树形")
+    public ResultResponse<PossessMenu> findPossessMenuByRoleId(@PathVariable Integer id){
+        log.info("findPossessMenuByRoleId---->id:{}",id);
+        return ResultResponse.ok(adminService.findPossessMenuByRoleId(id));
+    }
+
+    @PostMapping("/assignMenuToRole")
+    @ApiOperation(value = "给指定角色分配菜单")
+    public ResultResponse assignMenuToRole(@RequestParam("menuIds") List<Integer> menuIds,
+                                           @RequestParam("roleId") Integer roleId){
+        log.info("assignMenuToRole------->roleId:{},menuIds:{}",roleId,menuIds);
+        adminService.assignMenuToRole(menuIds,roleId);
+        return ResultResponse.ok();
+    }
+
+    @GetMapping("/findPossessPowerByRoleId/{id}")
+    @ApiOperation(value = "通过角色ID查询拥有的权限树形")
+    public ResultResponse<PossessPower> findPossessPowerByRoleId(@PathVariable Integer id){
+        log.info("findPossessPowerByRoleId---->id:{}",id);
+        return ResultResponse.ok(adminService.findPossessPowerByRoleId(id));
+    }
+
+    @PostMapping("/assignPowerToRole")
+    @ApiOperation(value = "给指定角色分配权限")
+    public ResultResponse assignPowerToRole(@RequestParam("powerIds") List<Integer> powerIds,
+                                            @RequestParam Integer roleId){
+        log.info("assignPowerToRole------->roleId:{},powerIds:{}",roleId,powerIds);
+        adminService.assignPowerToRole(powerIds,roleId);
+        return ResultResponse.ok();
     }
 
 

@@ -16,9 +16,9 @@ public class PossessMenu {
 
     private List<MenuVo> allMenus;
 
-    private List<MenuVo> hasMenus;
+    private List<Integer> hasMenus;
 
-    public PossessMenu(List<MenuVo> allMenus, List<MenuVo> hasMenus) {
+    public PossessMenu(List<MenuVo> allMenus, List<Integer> hasMenus) {
         this.allMenus = allMenus;
         this.hasMenus = hasMenus;
     }

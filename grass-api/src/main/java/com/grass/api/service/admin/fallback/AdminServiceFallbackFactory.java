@@ -76,6 +76,22 @@ public class AdminServiceFallbackFactory implements FallbackFactory<IAdminServic
                 return null;
             }
 
+            public PossessMenu findPossessMenuByRoleId(Integer id) {
+                return null;
+            }
+
+            public void assignMenuToRole(List<Integer> menuIds, Integer roleId) {
+
+            }
+
+            public PossessPower findPossessPowerByRoleId(Integer id) {
+                return null;
+            }
+
+            public void assignPowerToRole(List<Integer> powerIds, Integer roleId) {
+
+            }
+
             public MenuVo getMenu(Integer id) {
                 return null;
             }
