@@ -29,17 +29,18 @@ public class WebInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String currentUrl = request.getRequestURI();
+        log.info("currentUrl:{}",currentUrl);
         for (int i = 0; i < writeUrl.length; i++) {
             if(writeUrl[i].equals(currentUrl)){
                 log.info("------>检测到时白名单，通过！");
                 return true;
             }
         }
-        log.info("currentUrl:{}",currentUrl);
-        String c_token = request.getHeader(USER_TOKEN);
-        String s_token = (String)request.getSession().getAttribute(WebConstant.USER_TOKEN);
-        log.info("clientToken:{},realToken:{}",c_token,s_token);
-        if(c_token==null||!c_token.equals(s_token)){
+        String clientToken = request.getHeader(USER_TOKEN);
+        String sessionToken = (String)request.getSession().getAttribute(WebConstant.USER_TOKEN);
+        log.info("clientToken:{}",clientToken);
+        log.info("sessionToken:{}",sessionToken);
+        if(clientToken==null||!clientToken.equals(sessionToken)){
             throw new UnAuthorizedException(ErrorMsgEnum.UN_LOGIN);
         }
         return true;

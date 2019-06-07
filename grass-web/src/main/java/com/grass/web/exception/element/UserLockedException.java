@@ -1,22 +1,18 @@
 package com.grass.web.exception.element;
 
-
 import com.grass.common.enums.ErrorMsgEnum;
 import com.grass.web.exception.BaseException;
 
 /**
  * @Author Fenglixiong
- * @Create 2018.11.16 16:52
- * @Description 传参异常
+ * @Create 2019/6/8 1:40
+ * @Description 用户被锁定异常
  **/
-public class ParamException extends BaseException {
-
-    public ParamException(String message) {
+public class UserLockedException extends BaseException {
+    public UserLockedException(String message) {
         super(message);
     }
-
-    public ParamException(ErrorMsgEnum errorMsgEnum) {
+    public UserLockedException(ErrorMsgEnum errorMsgEnum) {
         super(errorMsgEnum);
     }
-
 }

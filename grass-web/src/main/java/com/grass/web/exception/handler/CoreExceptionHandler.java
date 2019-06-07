@@ -2,10 +2,8 @@ package com.grass.web.exception.handler;
 
 
 import com.grass.common.enums.ErrorMsgEnum;
-import com.grass.web.exception.element.BizException;
-import com.grass.web.exception.element.ParamException;
+import com.grass.web.exception.element.*;
 import com.grass.common.result.ResultResponse;
-import com.grass.web.exception.element.UnAuthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -33,27 +31,44 @@ public class CoreExceptionHandler implements InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(CoreExceptionHandler.class);
 
     /**
-     * 自定义认证异常类
-     * @param request
-     * @param e
-     * @return
+     * 登录异常类
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(UserLoginException.class)
+    public ResultResponse userLoginExceptionHandler(HttpServletRequest request, Exception e){
+        log.error("【异常地址】：{}",request.getRequestURL().toString());
+        log.error("【异常类型】认证异常userLoginException：{}",e);
+        return ResultResponse.error(ErrorMsgEnum.LOGIN_ERROR,e.getMessage());
+    }
+
+    /**
+     * 认证异常类
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(UnAuthorizedException.class)
     public ResultResponse unAuthorizedExceptionHandler(HttpServletRequest request, Exception e){
         log.error("【异常地址】：{}",request.getRequestURL().toString());
         log.error("【异常类型】认证异常unAuthorizedException：{}",e);
-        return ResultResponse.error(ErrorMsgEnum.UN_LOGIN);
+        return ResultResponse.error(ErrorMsgEnum.UN_LOGIN,e.getMessage());
     }
 
     /**
-     * 自定义权限异常类
-     * @param request
-     * @param e
-     * @return
+     * 锁定异常类
      */
     @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(NoPermissionException.class)
+    @ExceptionHandler(UserLockedException.class)
+    public ResultResponse userLockedExceptionHandler(HttpServletRequest request, Exception e){
+        log.error("【异常地址】：{}",request.getRequestURL().toString());
+        log.error("【异常类型】认证异常userLockedException：{}",e);
+        return ResultResponse.error(ErrorMsgEnum.LOGIN_LOCK,e.getMessage());
+    }
+
+
+    /**
+     * 权限异常类
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(AccessForbiddenException.class)
     public ResultResponse accessForbiddenExceptionHandler(HttpServletRequest request, Exception e){
         log.error("【异常地址】：{}",request.getRequestURL().toString());
         log.error("【异常类型】权限异常noPermissionException：{}",e);
@@ -61,10 +76,7 @@ public class CoreExceptionHandler implements InitializingBean {
     }
 
     /**
-     * 自定义传参异常类
-     * @param request
-     * @param e
-     * @return
+     * 传参异常类
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ParamException.class)
@@ -75,10 +87,7 @@ public class CoreExceptionHandler implements InitializingBean {
     }
 
     /**
-     * 自定义Hibernate校验异常类
-     * @param request
-     * @param e
-     * @return
+     * Hibernate校验异常类
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -94,9 +103,6 @@ public class CoreExceptionHandler implements InitializingBean {
 
     /**
      * 传参异常类
-     * @param request
-     * @param e
-     * @return
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MissingServletRequestParameterException.class)
@@ -107,10 +113,7 @@ public class CoreExceptionHandler implements InitializingBean {
     }
 
     /**
-     * 自定义Json转换异常类
-     * @param request
-     * @param e
-     * @return
+     * Json转换异常类
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -121,14 +124,11 @@ public class CoreExceptionHandler implements InitializingBean {
     }
 
     /**
-     * 自定义业务异常类
-     * @param request
-     * @param e
-     * @return
+     * 业务异常类
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BizException.class)
-    public ResultResponse bizExceptionHandler(HttpServletRequest request, Exception e){
+    public ResultResponse bizExceptionHandler(HttpServletRequest request, BizException e){
         log.error("【异常地址】：{}",request.getRequestURL().toString());
         log.error("【异常类型】业务异常BizException：{}",e);
         return ResultResponse.error(e.getMessage());
@@ -136,9 +136,6 @@ public class CoreExceptionHandler implements InitializingBean {
 
     /**
      * 全局异常类
-     * @param request
-     * @param e
-     * @return
      */
     @ExceptionHandler(Exception.class)
     public ResultResponse defaultExceptionHandler(HttpServletRequest request, Exception e){

@@ -7,7 +7,7 @@ import com.grass.web.exception.BaseException;
 /**
  * @Author Fenglixiong
  * @Create 2018.11.14 17:23
- * @Description
+ * @Description 用户认证异常
  **/
 public class UnAuthorizedException extends BaseException {
 

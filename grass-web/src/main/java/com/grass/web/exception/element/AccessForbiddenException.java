@@ -7,7 +7,7 @@ import com.grass.web.exception.BaseException;
 /**
  * @Author Fenglixiong
  * @Create 2018.11.14 17:17
- * @Description
+ * @Description 请求被拒绝异常
  **/
 public class AccessForbiddenException extends BaseException {
 

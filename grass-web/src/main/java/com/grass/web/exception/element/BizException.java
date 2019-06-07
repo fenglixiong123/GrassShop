@@ -7,7 +7,7 @@ import com.grass.web.exception.BaseException;
 /**
  * @Author Fenglixiong
  * @Create 2018.11.10 14:06
- * @Description 自定义业务异常类
+ * @Description 业务异常类
  **/
 public class BizException extends BaseException {
 
