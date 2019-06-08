@@ -7,7 +7,6 @@ import com.grass.common.page.PageResult;
 import com.grass.common.result.ResultResponse;
 import com.grass.common.utils.json.JsonUtils;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +29,9 @@ public class ConsoleMenuController {
     @Autowired
     private IAdminService adminService;
 
-    @GetMapping("/{id}")
+    @GetMapping
     @ApiOperation(value = "根据ID查询菜单")
-    public ResultResponse<MenuVo> getMenu(@PathVariable("id") Integer id){
+    public ResultResponse<MenuVo> getMenu(@RequestParam Integer id){
         log.info("getMenu------>id:{}",id);
         return ResultResponse.ok(adminService.getMenu(id));
     }
@@ -51,9 +50,9 @@ public class ConsoleMenuController {
         return ResultResponse.ok(adminService.updateMenu(menuVo));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     @ApiOperation(value = "删除菜单")
-    public ResultResponse<Integer> deleteMenu(@PathVariable("id") Integer id){
+    public ResultResponse<Integer> deleteMenu(@RequestParam("id") Integer id){
         log.info("deleteMenu------>id:{}",id);
         return ResultResponse.ok(adminService.deleteMenu(id));
     }

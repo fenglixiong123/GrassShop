@@ -7,7 +7,6 @@ import com.grass.common.page.PageResult;
 import com.grass.common.result.ResultResponse;
 import com.grass.common.utils.json.JsonUtils;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +29,9 @@ public class ConsolePowerController {
     @Autowired
     private IAdminService adminService;
 
-    @GetMapping("/{id}")
+    @GetMapping
     @ApiOperation(value = "根据ID查询权限")
-    public ResultResponse<PowerVo> getPower(@PathVariable("id") Integer id){
+    public ResultResponse<PowerVo> getPower(@RequestParam Integer id){
         log.info("getPower------>id:{}",id);
         return ResultResponse.ok(adminService.getPower(id));
     }
@@ -51,9 +50,9 @@ public class ConsolePowerController {
         return ResultResponse.ok(adminService.updatePower(powerVo));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     @ApiOperation(value = "删除权限")
-    public ResultResponse<Integer> deletePower(@PathVariable("id") Integer id){
+    public ResultResponse<Integer> deletePower(@RequestParam Integer id){
         log.info("deletePower------>id:{}",id);
         return ResultResponse.ok(adminService.deletePower(id));
     }

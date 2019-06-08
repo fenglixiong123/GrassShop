@@ -1,14 +1,14 @@
 package com.grass.console.service;
 
-import com.grass.api.vo.admin.AdminVo;
+import com.grass.api.vo.admin.LoginResult;
 
 import javax.servlet.http.HttpServletRequest;
 
 public interface ConsoleAdminService {
 
-    String loginByUsername(HttpServletRequest request,String username, String password);
+    LoginResult loginByUsername(HttpServletRequest request, String username, String password);
 
-    AdminVo findUserInfoByToken(HttpServletRequest request,String token);
+    Object getUserInfo(HttpServletRequest request);
 
     void logOut(HttpServletRequest request);
 

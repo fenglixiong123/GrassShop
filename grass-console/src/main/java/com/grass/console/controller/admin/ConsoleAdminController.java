@@ -33,9 +33,9 @@ public class ConsoleAdminController {
     @Autowired
     private IAdminService adminService;
 
-    @GetMapping("/{id}")
+    @GetMapping()
     @ApiOperation(value = "根据ID查询用户")
-    public ResultResponse get(@PathVariable("id") Long id){
+    public ResultResponse get(@RequestParam Long id){
         log.info("get---->id:{}",id);
         return ResultResponse.ok(adminService.getAdmin(id));
     }
@@ -58,9 +58,9 @@ public class ConsoleAdminController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping()
     @ApiOperation(value = "删除用户")
-    public ResultResponse delete(@PathVariable("id") Long id){
+    public ResultResponse delete(@RequestParam Long id){
         log.info("delete---->id:{}",id);
         return ResultResponse.ok(adminService.deleteAdmin(id));
     }
@@ -77,15 +77,15 @@ public class ConsoleAdminController {
     }
 
     @ApiOperation(value = "根据用户ID查询拥有的角色")
-    @GetMapping("/findPossessRoleByAdminId/{id}")
-    public ResultResponse<PossessRole> findPossessRoleByAdminId(@PathVariable("id") Long id){
+    @GetMapping("/findPossessRoleByAdminId")
+    public ResultResponse<PossessRole> findPossessRoleByAdminId(@RequestParam Long id){
         log.info("findPossessRoleByAdminId----->id:{}",id);
         return ResultResponse.ok(adminService.findPossessRoleByAdminId(id));
     }
 
     @ApiOperation(value = "分配角色给用户")
     @PostMapping("/assignRoleToAdmin")
-    public ResultResponse assignRoleToAdmin(@RequestParam("adminId") Long adminId,
+    public ResultResponse assignRoleToAdmin(@RequestParam Long adminId,
                                             @RequestParam(required = false) List<Integer> roleIds){
         log.info("assignRoleToAdmin----->adminId:{},roleIds:{}",adminId,roleIds);
         adminService.assignRoleToAdmin(roleIds,adminId);

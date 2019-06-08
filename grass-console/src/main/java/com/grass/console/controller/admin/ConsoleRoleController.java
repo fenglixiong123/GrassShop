@@ -9,7 +9,6 @@ import com.grass.common.page.PageResult;
 import com.grass.common.result.ResultResponse;
 import com.grass.common.utils.json.JsonUtils;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,9 @@ public class ConsoleRoleController {
     @Autowired
     private IAdminService adminService;
 
-    @GetMapping("/{id}")
+    @GetMapping
     @ApiOperation(value = "根据ID查询角色")
-    public ResultResponse<RoleVo> getRole(@PathVariable("id") Integer id){
+    public ResultResponse<RoleVo> getRole(@RequestParam Integer id){
         log.info("getRole------>id:{}",id);
         return ResultResponse.ok(adminService.getRole(id));
     }
@@ -53,9 +52,9 @@ public class ConsoleRoleController {
         return ResultResponse.ok(adminService.updateRole(roleVo));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     @ApiOperation(value = "删除角色")
-    public ResultResponse<Integer> deleteRole(@PathVariable("id") Integer id){
+    public ResultResponse<Integer> deleteRole(@RequestParam Integer id){
         log.info("deleteRole------>id:{}",id);
         return ResultResponse.ok(adminService.deleteRole(id));
     }
@@ -67,32 +66,32 @@ public class ConsoleRoleController {
         return ResultResponse.ok(adminService.listPageRole(pageQuery));
     }
 
-    @GetMapping("/findPossessMenuByRoleId/{id}")
+    @GetMapping("/findPossessMenuByRoleId")
     @ApiOperation(value = "通过角色ID查询拥有的菜单树形")
-    public ResultResponse<PossessMenu> findPossessMenuByRoleId(@PathVariable Integer id){
+    public ResultResponse<PossessMenu> findPossessMenuByRoleId(@RequestParam Integer id){
         log.info("findPossessMenuByRoleId---->id:{}",id);
         return ResultResponse.ok(adminService.findPossessMenuByRoleId(id));
     }
 
     @PostMapping("/assignMenuToRole")
     @ApiOperation(value = "给指定角色分配菜单")
-    public ResultResponse assignMenuToRole(@RequestParam("menuIds") List<Integer> menuIds,
-                                           @RequestParam("roleId") Integer roleId){
+    public ResultResponse assignMenuToRole(@RequestParam List<Integer> menuIds,
+                                           @RequestParam Integer roleId){
         log.info("assignMenuToRole------->roleId:{},menuIds:{}",roleId,menuIds);
         adminService.assignMenuToRole(menuIds,roleId);
         return ResultResponse.ok();
     }
 
-    @GetMapping("/findPossessPowerByRoleId/{id}")
+    @GetMapping("/findPossessPowerByRoleId")
     @ApiOperation(value = "通过角色ID查询拥有的权限树形")
-    public ResultResponse<PossessPower> findPossessPowerByRoleId(@PathVariable Integer id){
+    public ResultResponse<PossessPower> findPossessPowerByRoleId(@RequestParam Integer id){
         log.info("findPossessPowerByRoleId---->id:{}",id);
         return ResultResponse.ok(adminService.findPossessPowerByRoleId(id));
     }
 
     @PostMapping("/assignPowerToRole")
     @ApiOperation(value = "给指定角色分配权限")
-    public ResultResponse assignPowerToRole(@RequestParam("powerIds") List<Integer> powerIds,
+    public ResultResponse assignPowerToRole(@RequestParam List<Integer> powerIds,
                                             @RequestParam Integer roleId){
         log.info("assignPowerToRole------->roleId:{},powerIds:{}",roleId,powerIds);
         adminService.assignPowerToRole(powerIds,roleId);
